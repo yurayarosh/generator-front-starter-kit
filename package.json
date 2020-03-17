@@ -1,7 +1,7 @@
 {
   "name": "generator-front-starter-kit",
-  "version": "1.0.0",
-  "description": "Starter-kit for HTML, CSS, JS projects.",
+  "version": "1.0.1",
+  "description": "Starter-kit for HTML, CSS, JS projects Generator.",
   "files": [
     "generators"
   ],
@@ -13,6 +13,13 @@
   "main": "index.js",
   "author": "yurayarosh <yura12323@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yurayarosh/generator-front-starter-kit"
+  },
+  "bugs": {
+    "url": "https://github.com/yurayarosh/generator-front-starter-kit/issues"
+  },
   "dependencies": {
     "chalk": "^3.0.0",
     "mkdirp": "^1.0.3",
