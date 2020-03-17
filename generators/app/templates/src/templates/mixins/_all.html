@@ -1,0 +1,14 @@
+{% from 'mixins/_list.html' import list %}
+{% set list = list %}
+
+{% from 'mixins/_btn.html' import btn %}
+{% set btn = btn %}
+
+{% from 'mixins/_icon.html' import icon %}
+{% set icon = icon %}
+<% if (sprites.indexOf('sprite-svg') !== -1) { %>
+{% from 'mixins/_icon.html' import iconSvg %}
+{% set iconSvg = iconSvg %}
+<% } %>
+{% from 'mixins/_input.html' import input %}
+{% set input = input %}

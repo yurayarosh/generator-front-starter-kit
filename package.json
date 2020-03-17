@@ -1,0 +1,22 @@
+{
+  "name": "generator-starter-kit",
+  "version": "1.0.0",
+  "description": "Starter-kit for HTML, CSS, JS projects.",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "boilerplate",
+    "starter-kit"
+  ],
+  "main": "index.js",
+  "author": "yurayarosh <yura12323@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "mkdirp": "^1.0.3",
+    "yeoman-generator": "^4.7.2",
+    "yosay": "^2.0.2"
+  }
+}

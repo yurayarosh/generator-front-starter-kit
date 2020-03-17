@@ -1,0 +1,6 @@
+<% if (sprites.indexOf('inline-svg') !== -1) { %>{% macro icon(name, mod) %}
+  {% include 'icons/_'+ name +'.html' %}
+{% endmacro %}<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
+{% macro iconSvg(name) %}
+  <svg class="icon-svg icon-svg-{{ name }}"><use xlink:href="img/sprite.svg#icon-svg-{{ name }}"></use></svg>
+{% endmacro %}<% } %>

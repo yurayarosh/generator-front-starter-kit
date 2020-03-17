@@ -1,0 +1,4 @@
+ProjectTitle: <%= name %>
+
+PageList:
+- file: page.html

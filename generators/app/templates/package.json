@@ -1,0 +1,120 @@
+{
+  "name": "<%= name %>",
+  "version": "1.0.0",
+  "authors": "<%= author %>",
+  "license": "<%= license %>",
+  "scripts": {
+    "ghpages": "git subtree push --prefix build origin gh-pages",
+    "build": "gulp build --production",
+    "start": "gulp"
+  },
+  "lint-staged": {
+    "build/**/*.html": [
+      "htmlhint --config .htmlhintrc"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "not dead"
+  ],
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "extends": [
+      "airbnb-base",
+      "plugin:prettier/recommended"
+    ],
+    "rules": {
+      "no-plusplus": [
+        "error",
+        {
+          "allowForLoopAfterthoughts": true
+        }
+      ],
+      "no-unused-vars": 1,
+      "class-methods-use-this": 0,
+      "no-underscore-dangle": 0,
+      "no-param-reassign": 0
+    }
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry",
+          "corejs": {
+            "version": 3,
+            "proposals": true
+          }
+        }
+      ]
+    ]
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/register": "^7.7.7",
+    "ansi-colors": "^4.1.1",
+    "autoprefixer": "^9.7.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "browser-sync": "^2.26.7",
+    "css-mqpacker": "^7.0.0",
+    "del": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.2",<% if (sprites.indexOf('sprite-svg') !== -1 || sprites.indexOf('inline-svg') !== -1) { %>
+    "gulp-cheerio": "^1.0.0",<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
+    "gulp-changed": "^4.0.2",
+    "gulp-svgstore": "^7.0.1",<% } %><% if (sprites.indexOf('inline-svg') !== -1) { %>    
+    "gulp-cheerio-clean-svg": "github:Hiswe/gulp-cheerio-clean-svg",<% } %>
+    "gulp-consolidate": "^0.2.0",<% if (multilanguage) { %>
+    "gulp-data": "^1.3.1",<% } %>
+    "gulp-front-matter": "^1.3.0",
+    "gulp-if": "^3.0.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-nunjucks-render": "^2.2.3",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-prettify": "^0.5.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-svgmin": "^2.2.0",<% if (sprites.indexOf('png') !== -1) { %>
+    "gulp.spritesmith": "^6.11.0",
+    "vinyl-buffer": "^1.0.1",<% } %>
+    "htmlhint": "^0.11.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
+    "lodash": "^4.17.15",
+    "minimist": "^1.2.5",
+    "plugin-error": "^1.0.1",
+    "postcss-csso": "^4.0.0",
+    "prettier": "1.19.1",
+    "require-yaml": "0.0.1",    
+    "webpack": "^4.41.5",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-glsl-loader": "^1.0.1"
+  },
+  "dependencies": {
+    "core-js": "^3.6.2",
+    "intersection-observer": "^0.7.0",
+    "lozad": "^1.14.0",
+    "regenerator-runtime": "^0.13.3"
+  }
+}

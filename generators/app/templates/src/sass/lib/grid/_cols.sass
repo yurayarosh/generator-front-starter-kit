@@ -1,0 +1,22 @@
+@for $i from 1 through $cols-number
+  .col
+    &--#{$i}
+      width: percentage($i/$cols-number)
+    &--xxs-#{$i}
+      +xxsmin
+        width: percentage($i/$cols-number)
+    &--xs-#{$i}
+      +xsmin
+        width: percentage($i/$cols-number)
+    &--sm-#{$i}
+      +smmin
+        width: percentage($i/$cols-number)
+    &--md-#{$i}
+      +mdmin
+        width: percentage($i/$cols-number)
+    &--lg-#{$i}
+      +lgmin
+        width: percentage($i/$cols-number)
+    &--xl-#{$i}
+      +xlmin
+        width: percentage($i/$cols-number)
