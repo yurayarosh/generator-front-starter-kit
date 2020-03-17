@@ -9,7 +9,7 @@ First, install [Yeoman](http://yeoman.io) and generator-man using [npm](https://
 
 ```bash
 npm install -g yo
-npm install -g generator-starter-kit
+npm install -g generator-front-starter-kit
 ```
 
 Then generate your new project:
