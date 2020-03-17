@@ -1,4 +1,4 @@
-# generator-starter-kit [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-starter-kit
 Based on https://github.com/coderiver/generator-man
 
 > Simple and quite universal frontend scaffolding. Webpack, nunjucks, sass, linters, PostCSS, inline svg, svg sprites, png sprites, everything that simplifies your life included.
