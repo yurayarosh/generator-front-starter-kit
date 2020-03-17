@@ -1,20 +1,21 @@
 import colors from 'ansi-colors'
 import log from 'fancy-log'
-const argv = require('minimist')(process.argv.slice(2))
-import { existsSync, readdirSync } from 'fs'
+const argv = require('minimist')(process.argv.slice(2))<% if (multilanguage) { %>
+import { existsSync, readdirSync } from 'fs'<% } %>
 
 const production =
 argv.production || argv.prod || argv._.indexOf('build') !== -1 || false
 const destPath = 'build'
-const hasLanguagesDirectory = existsSync('src/languages')
+<% if (multilanguage) { %>
 const languageDirectories =
-  hasLanguagesDirectory && readdirSync('src/languages').length > 0 ? readdirSync('src/languages') : ['']
+  existsSync('src/languages') && readdirSync('src/languages').length > 0
+  ? readdirSync('src/languages')
+  : ['']<% } %>
 
 const config = {
   env: 'development',
-  production,
-  hasLanguagesDirectory,
-  languageDirectories,
+  production,<% if (multilanguage) { %>
+  languageDirectories,<% } %>
 
   src: {
     root: 'src',

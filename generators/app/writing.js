@@ -30,7 +30,7 @@ module.exports = function() {
   fs.copyTpl(this.templatePath('package.json'), 'package.json', props)
 
   // gulp configs
-  fs.copy(this.templatePath('gulp/config.js'), 'gulp/config.js')
+  fs.copyTpl(this.templatePath('gulp/config.js'), 'gulp/config.js', props)
   fs.copy(this.templatePath('gulp/util/handle-errors.js'), 'gulp/util/handle-errors.js')
 
   // common tasks
