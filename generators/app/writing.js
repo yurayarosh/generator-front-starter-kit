@@ -14,6 +14,7 @@ module.exports = function() {
   // const HAS_SCSS = props.css === 'scss'
   const HAS_CSS_GRID = props.cssGrid
   const HAS_MULTILANGUAGE = props.multilanguage
+  const HAS_DEMIWEB_HELLO = props.sayHello
 
   // create directories
   mkdirp(join(destPath, 'src/fonts'))
@@ -85,22 +86,6 @@ module.exports = function() {
     fs.copy(this.templatePath('gulp/tasks/nunjucks.js'), 'gulp/tasks/nunjucks.js')
   }
 
-  // if (HAS_PREVIEW) {
-  //   if (HAS_MULTILANGUAGE) {
-  //     fs.copy(
-  //       this.templatePath('gulp/tasks/index-multilanguage/index.html'),
-  //       'gulp/tasks/index/index.html'
-  //     )
-  //     fs.copy(
-  //       this.templatePath('gulp/tasks/list-pages-multilanguage.js'),
-  //       'gulp/tasks/list-pages.js'
-  //     )
-  //   } else {
-  //     fs.copy(this.templatePath('gulp/tasks/index/index.html'), 'gulp/tasks/index/index.html')
-  //     fs.copy(this.templatePath('gulp/tasks/list-pages.js'), 'gulp/tasks/list-pages.js')
-  //   }
-  // }
-
   // svg inline task
   if (HAS_SVG_INLINE) {
     fs.copy(this.templatePath('gulp/tasks/svgicons.js'), 'gulp/tasks/svgicons.js')
@@ -146,6 +131,9 @@ module.exports = function() {
   if (!HAS_CSS_GRID && HAS_SASS) fs.delete('src/sass/lib/grid')
   if (!HAS_PNG) fs.delete('src/sass/_icons-png.sass')
   // if (!HAS_CSS_GRID && HAS_SCSS) fs.delete('src/scss/lib/grid')
+
+  // js
+  if (!HAS_DEMIWEB_HELLO) fs.delete('src/js/lib/sayHello.js')
 
   // html
   if (!HAS_PREVIEW && !HAS_MULTILANGUAGE) {

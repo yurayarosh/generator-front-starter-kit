@@ -76,7 +76,7 @@ module.exports = [
     type: 'confirm',
     name: 'sayHello',
     message: 'Add Demiweb hello to console?',
-    default: true,
+    default: false,
   },
   {
     type: 'confirm',

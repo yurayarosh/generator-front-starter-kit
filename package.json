@@ -1,6 +1,6 @@
 {
   "name": "generator-front-starter-kit",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Starter-kit for HTML, CSS, JS projects Generator.",
   "files": [
     "generators"

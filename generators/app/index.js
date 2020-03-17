@@ -6,15 +6,8 @@ const prompts = require('./prompts')
 const writeFiles = require('./writing')
 
 module.exports = class extends Generator {
-  // constructor(args, opts) {
-  //   // Calling the super constructor is important so our generator is correctly set up
-  //   super(args, opts)
-
-  //   // Next, add your custom code
-  //   this.option('babel') // This method adds support for a `--babel` flag
-  // }
   prompting() {
-    this.log(yosay('Welcome to the kickass ' + chalk.red('starter-kit') + ' generator!'))
+    this.log(yosay(`Welcome to the kickass ${chalk.red('starter-kit')} generator!`))
 
     return this.prompt(prompts).then(props => {
       this.props = props
@@ -34,7 +27,7 @@ module.exports = class extends Generator {
         yarn: true,
       })
     } else {
-      this.log('Run ' + chalk.blue('npm install or yarn') + ' to install dependencies later')
+      this.log(`Run ${chalk.blue('npm install')} or ${chalk.blue('yarn')} to install dependencies later.`)
     }
   }
 
