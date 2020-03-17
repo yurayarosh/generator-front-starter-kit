@@ -123,10 +123,6 @@ module.exports = function() {
   // }
 
   // delete files and directories
-  // icons
-  if (!HAS_PNG && HAS_SASS) fs.delete('src/sass/generated/_sprite-png.sass')
-  // if (!HAS_PNG && HAS_SCSS) fs.delete('src/sass/generated/_sprite-png.scss')
-
   // css
   if (!HAS_CSS_GRID && HAS_SASS) fs.delete('src/sass/lib/grid')
   if (!HAS_PNG) fs.delete('src/sass/_icons-png.sass')
