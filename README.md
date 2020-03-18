@@ -15,7 +15,7 @@ npm install -g generator-front-starter-kit
 Then generate your new project:
 
 ```bash
-yo generator-front-starter-kit
+yo front-starter-kit
 ```
 
 ## Getting To Know Yeoman
