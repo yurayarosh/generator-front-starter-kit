@@ -7,7 +7,7 @@ const writeFiles = require('./writing')
 
 module.exports = class extends Generator {
   prompting() {
-    this.log(yosay(`Welcome to the kickass ${chalk.red('starter-kit')} generator!`))
+    this.log(yosay(`Welcome to the kickass ${chalk.red('front-starter-kit')} generator!`))
 
     return this.prompt(prompts).then(props => {
       this.props = props
