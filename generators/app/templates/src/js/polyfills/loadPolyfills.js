@@ -2,12 +2,8 @@ export default function loadPolyfills(callback) {
   const appScript = document.getElementById('app-script')
 
   if (appScript) {
-    const baseSrc = appScript.src
-      .split('/')
-      .slice(0, -1)
-      .join('/')
+    const src = appScript.src.replace('app.js', 'polyfills.js')
 
-    const src = `${baseSrc}/polyfills.js`
     const js = document.createElement('script')
     js.src = src
     js.onload = () => {
