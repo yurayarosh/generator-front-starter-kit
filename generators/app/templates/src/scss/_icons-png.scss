@@ -1,0 +1,7 @@
+.ic {
+  display: inline-block;
+
+  &--facebook {
+    @include sprite(facebook);
+  }
+}

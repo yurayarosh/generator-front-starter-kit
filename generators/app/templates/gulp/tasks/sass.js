@@ -41,7 +41,7 @@ const processors = [
 
 gulp.task('sass', () =>
   gulp
-    .src(`${src.sass}/*.{sass,scss}`)
+    .src(`${src.styles}/*.{sass,scss}`)
     .pipe(sourcemaps.init())
     .pipe(
       sass({
@@ -56,7 +56,7 @@ gulp.task('sass', () =>
 )
 
 const build = gulp => gulp.parallel('sass')
-const watch = gulp => () => gulp.watch(`${src.sass}/**/*.{sass,scss}`, gulp.parallel('sass'))
+const watch = gulp => () => gulp.watch(`${src.styles}/**/*.{sass,scss}`, gulp.parallel('sass'))
 
 module.exports.build = build
 module.exports.watch = watch

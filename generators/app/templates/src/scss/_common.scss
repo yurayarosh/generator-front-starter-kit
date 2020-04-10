@@ -1,0 +1,31 @@
+html {
+  font-size: $base-fz + px;
+  line-height: 1.4;
+  color: $c-text;
+
+  @include reg;
+  @include sm {
+    font-size: $base-fz-sm + px;
+  }
+}
+
+body {
+  background-color: $white;
+  min-width: 320px;
+
+  @include no-scroll;
+}
+
+.icon {
+  display: inline-block;
+  fill: currentColor;
+  font-size: inherit;
+}
+
+.lazy {
+  $this: &;
+
+  &--loaded:not(#{$this}--no-fade-in) {
+    animation: fadeIn 1s;
+  }
+}

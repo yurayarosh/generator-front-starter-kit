@@ -1,0 +1,22 @@
+@for $i from 1 through $cols-number
+  .col
+    &--order-#{$i}
+      order: $i
+    &--order-xxs-#{$i}
+      +xxsmin
+        order: $i
+    &--order-xs-#{$i}
+      +xsmin
+        order: $i
+    &--order-sm-#{$i}
+      +smmin
+        order: $i
+    &--order-md-#{$i}
+      +mdmin
+        order: $i
+    &--order-lg-#{$i}
+      +lgmin
+        order: $i
+    &--order-xl-#{$i}
+      +xlmin
+        order: $i

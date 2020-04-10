@@ -30,7 +30,7 @@ gulp.task('sprite-png', () => {
       })
     )
   spriteData.img.pipe(buffer()).pipe(gulp.dest(dest.img))
-  spriteData.css.pipe(gulp.dest(src.sassGen))
+  spriteData.css.pipe(gulp.dest(src.stylesGen))
 
   return spriteData
 })

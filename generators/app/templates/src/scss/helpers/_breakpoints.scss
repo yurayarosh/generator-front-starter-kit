@@ -1,0 +1,83 @@
+@mixin xxl {
+  @include r(1499) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @include r(1399) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @include r(1199) {
+    @content;
+  }
+}
+
+@mixin md {
+  @include r(991) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @include r(767) {
+    @content;
+  }
+}
+
+@mixin xs {
+  @include r(575) {
+    @content;
+  }
+}
+
+@mixin xxs {
+  @include r(479) {
+    @content;
+  }
+}
+
+@mixin xxlmin {
+  @include rmin(1500) {
+    @content;
+  }
+}
+
+@mixin xlmin {
+  @include rmin(1400) {
+    @content;
+  }
+}
+
+@mixin lgmin {
+  @include rmin(1200) {
+    @content;
+  }
+}
+
+@mixin mdmin {
+  @include rmin(992) {
+    @content;
+  }
+}
+
+@mixin smmin {
+  @include rmin(768) {
+    @content;
+  }
+}
+
+@mixin xsmin {
+  @include rmin(576) {
+    @content;
+  }
+}
+
+@mixin xxsmin {
+  @include rmin(480) {
+    @content;
+  }
+}

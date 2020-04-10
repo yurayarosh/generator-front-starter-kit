@@ -1,8 +1,7 @@
 // import regeneratorRuntime from 'regenerator-runtime'
 
 import loadPolyfills from './polyfills/loadPolyfills'
-import classNames from './classNames'<% if (sayHello) { %>
-import sayHello from './lib/sayHello'<% } %>
+import classNames from './classNames'
 import setHTMLClassNames from './methods/setHTMLClassNames'
 import setLazy from './methods/setLazy'
 import { isModernBrowser } from './helpers'
@@ -38,8 +37,7 @@ class App {
   // }
 
   initMethods() {
-    this.methods = {<% if (sayHello) { %>
-      sayHello,<% } %>
+    this.methods = {
       setHTMLClassNames,
       setLazy,
     }

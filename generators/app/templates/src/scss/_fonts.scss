@@ -1,0 +1,6 @@
+@include font("proximanova", "proximanova-regular-webfont");
+@include font("proximanova", "proximanova-bold-webfont", 700);
+
+@mixin reg {
+  font-family: "proximanova", sans-serif;
+}

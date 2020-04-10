@@ -16,22 +16,22 @@ module.exports = [
     message: 'Input project license',
     default: 'MIT',
   },
-  // {
-  //   type: 'list',
-  //   name: 'css',
-  //   message: 'Choose CSS engine',
-  //   choices: [
-  //     {
-  //       name: 'Sass + PostCSS',
-  //       value: 'sass',
-  //     },
-  //     {
-  //       name: 'Scss + PostCSS',
-  //       value: 'scss',
-  //     },
-  //   ],
-  //   default: 0,
-  // },
+  {
+    type: 'list',
+    name: 'css',
+    message: 'Choose CSS engine',
+    choices: [
+      {
+        name: 'Sass + PostCSS',
+        value: 'sass',
+      },
+      {
+        name: 'Scss + PostCSS',
+        value: 'scss',
+      },
+    ],
+    default: 0,
+  },
   {
     type: 'confirm',
     name: 'cssGrid',
@@ -70,12 +70,6 @@ module.exports = [
     type: 'confirm',
     name: 'multilanguage',
     message: 'Make multilanguage version?',
-    default: false,
-  },
-  {
-    type: 'confirm',
-    name: 'sayHello',
-    message: 'Add Demiweb hello to console?',
     default: false,
   },
   {

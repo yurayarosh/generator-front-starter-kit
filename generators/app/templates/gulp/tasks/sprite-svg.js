@@ -89,7 +89,7 @@ gulp.task('sprite:svg', () =>
               symbols: data,
             })
           )
-          .pipe(gulp.dest(config.src.sassGen))
+          .pipe(gulp.dest(config.src.stylesGen))
         cb()
       })
     )

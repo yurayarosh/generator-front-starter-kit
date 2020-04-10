@@ -1,0 +1,28 @@
+\:root
+  --grid-gap:          #{$grid-gap}
+  --container-padding: #{$container-padding-static}
+  // +xl
+  //   --grid-gap:          #{$grid-gap-xl}
+  //   --container-padding: #{$container-padding-static-xl}
+  // +lg
+  //   --grid-gap:          #{$grid-gap-lg}
+  //   --container-padding: #{$container-padding-static-lg}
+  // +md
+  //   --grid-gap:          #{$grid-gap-md}
+  //   --container-padding: #{$container-padding-static-md}
+  // +sm
+  //   --grid-gap:          #{$grid-gap-sm}
+  //   --container-padding: #{$container-padding-static-sm}
+  // +xs
+  //   --grid-gap:          #{$grid-gap-xs}
+  //   --container-padding: #{$container-padding-static-xs}
+  // +xxs
+  //   --grid-gap:          #{$grid-gap-xxs}
+  //   --container-padding: #{$container-padding-static-xxs}
+
+$container-padding:     var(--container-padding, #{$container-padding-static})
+$half-gap:              calc(var(--grid-gap, #{$grid-gap}) / 2)
+$half-gap-negative:     calc(var(--grid-gap, #{$grid-gap}) / -2)
+$gap:                   var(--grid-gap, $grid-gap)
+$gap-negative:          calc(0px - var(--grid-gap, #{$grid-gap}))
+      

@@ -1,0 +1,317 @@
+// width
+@mixin r($width) {
+  @media (max-width: $width + "px") {
+    @content;
+  }
+}
+
+@mixin rmin($width) {
+  @media (min-width: $width + "px") {
+    @content;
+  }
+}
+
+// height
+@mixin rh($height) {
+  @media (max-height: $height + "px") {
+    @content;
+  }
+}
+
+@mixin rhmin($height) {
+  @media (min-height: $height + "px") {
+    @content;
+  }
+}
+
+@mixin css-lock($min-size: 1, $max-size: 1.4, $min-width: 20, $max-width: 100, $property: font-size, $unit: px) {
+  #{$property}: #{$max-size}#{$unit};
+  #{$property}: calc(#{$min-size}#{$unit} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}#{$unit}) / (#{$max-width} - #{$min-width})));
+
+  @media (max-width: #{$min-width}#{$unit}) {
+    #{$property}: #{$min-size}#{$unit};
+  }
+
+  @media (min-width: #{$max-width}#{$unit}) {
+    #{$property}: #{$max-size}#{$unit};
+  }
+}
+
+@mixin text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin hover {
+  .no-touch &:hover {
+    @content;
+  }
+}
+
+@mixin ready {
+  .is-ready & {
+    @content;
+  }
+}
+
+@mixin coverdiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+@mixin cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+// vertical-align at center
+@mixin vcenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// font-family
+@mixin font($alias, $name, $font-weight: 400, $font-style: normal) {
+  @font-face {
+    font-family: $alias;
+    src: url("../fonts/" + $name + ".woff2") format("woff2"), url("../fonts/" + $name + ".woff") format("woff");
+    font-weight: $font-weight;
+    font-style: $font-style;
+    font-display: swap;
+  }
+}
+
+// to use:
+//+font(black, cytiapro-black-webfont)
+
+@mixin hide-text {
+  font: 0 / 0 a;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin vertical {
+  text-align: center;
+  font-size: 0;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+  }
+}
+
+@mixin clr {
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin placeholder {
+  &:-ms-input-placeholder {
+    @content;
+  }
+
+  &::placeholder {
+    @content;
+  }
+}
+
+//triangle
+@mixin arr($width, $height, $bg, $direction) {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+
+  @if $direction == t {
+    border-width: 0 ($width / 2) $height ($width / 2);
+    border-color: transparent transparent $bg transparent;
+  }
+
+  @if $direction == r {
+    border-width: ($height / 2) 0 ($height / 2) $width;
+    border-color: transparent transparent transparent $bg;
+  }
+
+  @if $direction == b {
+    border-width: $height ($width / 2) 0 ($width / 2);
+    border-color: $bg transparent transparent transparent;
+  }
+
+  @if $direction == l {
+    border-width: ($height / 2) $width ($height / 2) 0;
+    border-color: transparent $bg transparent transparent;
+  }
+
+  @if $direction == tl {
+    border-width: $height $width 0 0;
+    border-color: $bg transparent transparent transparent;
+  }
+
+  @if $direction == tr {
+    border-width: 0 $width $height 0;
+    border-color: transparent $bg transparent transparent;
+  }
+
+  @if $direction == br {
+    border-width: 0 0 $height $width;
+    border-color: transparent transparent $bg transparent;
+  }
+
+  @if $direction == bl {
+    border-width: $width 0 0 $height;
+    border-color: transparent transparent transparent $bg;
+  }
+}
+
+// example
+// +arr(500,50, #000, l)
+// +arr(500,50, #000, bl)
+
+@mixin rotate($var) {
+  transform: rotate($var + deg);
+}
+
+@mixin scale($var) {
+  transform: scale($var);
+}
+
+@mixin tr($what...) {
+  transition: $what;
+}
+
+//icon close
+@mixin icon-close($size, $line-width, $color) {
+  position: relative;
+  display: inline-block;
+  width: $size;
+  height: $size;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    width: $line-width;
+    height: 100%;
+    background-color: $color;
+    top: 0;
+    left: 50%;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+// example
+// +icon-close(15, 2, #000)
+
+// icon arrow
+@mixin icon-arrow($width, $height, $bd-width, $color, $angle, $units: em) {
+  width: $width + $units;
+  height: $height + $units;
+  border-left: ($bd-width + $units) solid $color;
+  border-bottom: ($bd-width + $units) solid $color;
+  transform: rotate($angle + deg);
+}
+
+// example
+// +icon-arrow(20, 20, 2, #000, 45)
+
+@mixin no-scroll {
+  &.no-scroll {
+    overflow: hidden;
+  }
+
+  .no-touch &.no-scroll {
+    margin-right: 17px;
+  }
+}
+
+// BG-IMAGE
+@function img-url($image) {
+  @return url("../img/#{$image}");
+}
+
+@mixin image($image) {
+  background-image: img-url($image);
+}
+
+@mixin before {
+  &::before {
+    content: "";
+
+    @content;
+  }
+}
+
+@mixin after {
+  &::after {
+    content: "";
+
+    @content;
+  }
+}
+
+@mixin notlast {
+  &:not(:last-child) {
+    @content;
+  }
+}
+
+@mixin notfirst {
+  &:not(:first-child) {
+    @content;
+  }
+}
+
+@function em($size, $context: $base-fz) {
+  @return $size / $context * 1em;
+}
+
+@function rem($size, $context: $base-fz) {
+  @return $size / $context * 1rem;
+}
+
+@mixin hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+@mixin visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+@mixin list-bullet {
+  &::before {
+    content: "•";
+    display: inline-block;
+  }
+}
+
+@mixin counter($var, $sep) {
+  counter-reset: list + $var;
+
+  > li {
+    &:before {
+      content: counter(list + $var) $sep;
+      counter-increment: list + $var;
+    }
+  }
+}

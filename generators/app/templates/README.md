@@ -29,6 +29,7 @@ Task name          | Description
 `svgo`             | optimize svg files with [svgo](https://github.com/svg/svgo)
 `svgicons`         | take .svg sources from `./icons` clean and create .html files in `./templates/partials/icons` to use it inline
 `sprite-png`       | create png sprites
+`sprite-svg`       | create svg sprites
 `server`           | run dev-server powered by [BrowserSync](https://www.browsersync.io/)
 `clean`            | remove `./build` folder
 `list-pages`       | create index file with links to all project pages

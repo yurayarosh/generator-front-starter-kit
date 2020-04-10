@@ -9,12 +9,12 @@ module.exports = function() {
   const HAS_PNG = props.sprites.indexOf('png') !== -1
   const HAS_SVG = props.sprites.indexOf('sprite-svg') !== -1
   const HAS_SVG_INLINE = props.sprites.indexOf('inline-svg') !== -1  
-  const HAS_SASS = true // maybe later I 'll add scss generation
-  // const HAS_SASS = props.css === 'sass'
-  // const HAS_SCSS = props.css === 'scss'
+  // const HAS_SASS = true // maybe later I 'll add scss generation
+  const HAS_SASS = props.css === 'sass'
+  const HAS_SCSS = props.css === 'scss'
   const HAS_CSS_GRID = props.cssGrid
   const HAS_MULTILANGUAGE = props.multilanguage
-  const HAS_DEMIWEB_HELLO = props.sayHello
+  // const HAS_SAY_HELLO = props.sayHello // maybe later i' ll add sayHello() generating
 
   // create directories
   mkdirp(join(destPath, 'src/fonts'))
@@ -112,24 +112,25 @@ module.exports = function() {
     )
   }
 
-  // if (HAS_SASS) {
-  fs.copy(this.templatePath('src/sass'), 'src/sass')
-  fs.copyTpl(this.templatePath('src/sass/app.sass'), 'src/sass/app.sass', props)
-  // }
+  if (HAS_SASS) {
+    fs.copy(this.templatePath('src/sass'), 'src/styles')
+    fs.copyTpl(this.templatePath('src/sass/app.sass'), 'src/styles/app.sass', props)
+  }
 
-  // if (HAS_SCSS) {
-  //   fs.copy(this.templatePath('src/scss'), 'src/scss')
-  //   fs.copyTpl(this.templatePath('src/scss/app.scss'), 'src/scss/app.scss', props)
-  // }
+  if (HAS_SCSS) {
+    fs.copy(this.templatePath('src/scss'), 'src/styles')
+    fs.copyTpl(this.templatePath('src/scss/app.scss'), 'src/styles/app.scss', props)
+  }
 
   // delete files and directories
   // css
-  if (!HAS_CSS_GRID && HAS_SASS) fs.delete('src/sass/lib/grid')
-  if (!HAS_PNG) fs.delete('src/sass/_icons-png.sass')
-  // if (!HAS_CSS_GRID && HAS_SCSS) fs.delete('src/scss/lib/grid')
+  if (!HAS_CSS_GRID && HAS_SASS) fs.delete('src/styles/lib/grid')
+  if (!HAS_PNG && HAS_SASS) fs.delete('src/styles/_icons-png.sass')
+  if (!HAS_PNG && HAS_SCSS) fs.delete('src/styles/_icons-png.scss')
+  if (!HAS_CSS_GRID && HAS_SCSS) fs.delete('src/styles/lib/grid')
 
   // js
-  if (!HAS_DEMIWEB_HELLO) fs.delete('src/js/lib/sayHello.js')
+  // if (!HAS_SAY_HELLO) fs.delete('src/js/lib/sayHello.js')
 
   // html
   if (!HAS_PREVIEW && !HAS_MULTILANGUAGE) {
