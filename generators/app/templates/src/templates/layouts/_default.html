@@ -1,6 +1,6 @@
 {% import "mixins/_all.html" as mixins %}
 <!doctype html>
-<html>
+<html lang="{% if language %}{{ language }}{% else %}en{% endif %}">
   <head>
     <meta charset="utf-8"/>
     <title>{% if title %}{{ title }}{% else %}Template{% endif %}</title>
@@ -11,22 +11,19 @@
     <link rel="stylesheet" media="all" href="css/app.css"/>
   </head>
   <body {% if bodyClass %}class="{{ bodyClass }}"{% endif %}>
-
     <!-- BEGIN content -->
     <div class="out{% if outClass %} {{ outClass }}{% endif %}">
       {% include "partials/_header.html" %}
       <!-- begin main -->
-      <main class="main{% if mainClass %} {{ mainClass }}{% endif %}">
+      <main class="out__main main{% if mainClass %} {{ mainClass }}{% endif %}">
         {% block content %}{% endblock %}
       </main>
       <!-- end main -->      
       {% include "partials/_footer.html" %}
     </div>
     <!-- END content -->
-
     <!-- BEGIN scripts -->
-    <script id="app-script" type="text/javascript" src="js/app.js"></script>
+    <script id="app-script" src="js/app.js"></script>
     <!-- END scripts -->
-
   </body>
 </html>

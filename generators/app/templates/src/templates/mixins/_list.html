@@ -14,27 +14,29 @@
   <span
      class="{% if nameAsClass %}{{ name }}{% endif %}{% if modifications.wrap %} {{ modifications.wrap }}{% endif %}"
      {% for attr, attrValue in attributes %} {{ attr }}="{{ attrValue }}" {% endfor %}
-    >
+  >
   {% elseif hasWrap %}
   <div
      class="{% if nameAsClass %}{{ name }}{% endif %}{% if modifications.wrap %} {{ modifications.wrap }}{% endif %}"
      {% for attr, attrValue in attributes %} {{ attr }}="{{ attrValue }}" {% endfor %}
-    >
+  >
   {% endif %}
-    <dl {% if modifications.list %}class="{{ modifications.list }}"{% endif %}{% if not hasWrap and nameAsClass %}class="{{ name }}"{% endif %}>
+    <dl class="{% if modifications.list %}{{ modifications.list }} {% endif %}{% if not hasWrap and nameAsClass %}{{ name }}{% endif %}">
       {% for i in list %}
       <dt
         {% if modifications.dt or i.modItemDt %}class="{{ modifications.dt }} {{ i.modItemDt }}"{% endif %}
-        >{% if i.dt %}{{ i.dt | safe }}{% endif %}{% if i.link %}<a
+      >{% if i.dt %}{{ i.dt | safe }}{% endif %}{% if i.link %}<a
         href="{% if i.href %}{{ i.href }}{% else %}#{% endif %}"
         {% if modifications.link or i.modLink %}class="{{ modifications.link }} {{ i.modLink }}"{% endif %}
-        >{{ i.link | safe }}</a>{% endif %}</dt>
+        >{{ i.link | safe }}</a>{% endif %}</dt
+      >
       <dd
         {% if modifications.dd or i.modItemDl %}class="{{ modifications.dd }} {{ i.modItemDl }}"{% endif %}
-        >{% if i.dd %}{{ i.dd | safe }}{% endif %}{% if i.link %}<a
+      >{% if i.dd %}{{ i.dd | safe }}{% endif %}{% if i.link %}<a
         href="{% if i.href %}{{ i.href }}{% else %}#{% endif %}"
         {% if modifications.link or i.modLink %}class="{{ modifications.link }} {{ i.modLink }}"{% endif %}
-        >{{ i.link | safe }}</a>{% endif %}</dd>
+        >{{ i.link | safe }}</a>{% endif %}</dd
+      >
       {% endfor %}
     </dl>
   {% if isInline %}
@@ -63,16 +65,20 @@
      {% for attr, attrValue in attributes %} {{ attr }}="{{ attrValue }}" {% endfor %}
   >
   {% endif %}
-    <ul {% if modifications.list %}class="{{ modifications.list }}"{% endif %}{% if not hasWrap and nameAsClass %}class="{{ name }}"{% endif %}>
+    <ul class="{% if modifications.list %}{{ modifications.list }} {% endif %}{% if not hasWrap and nameAsClass %}{{ name }}{% endif %}">
       {% for i in list %}
       <li
         {% if modifications.item or i.modItem %}class="{{ modifications.item }} {{ i.modItem }}"{% endif %}
         {% for attr, attrValue in i.itemAttributes %} {{ attr }}="{{ attrValue }}" {% endfor %}
-        >{% if i.link %}<a
+      >{% if i.link %}<a
          href="{% if i.href %}{{ i.href }}{% else %}#{% endif %}"
          {% if modifications.link or i.modLink %}class="{{ modifications.link }} {{ i.modLink }}"{% endif %}
          {% for attr, attrValue in i.linkAttributes %} {{ attr }}="{{ attrValue }}" {% endfor %}
-         >{{ i.link | safe }}</a>{% endif %}{% if i.item %}{{ i.item | safe }}{% endif %}</li>
+       >{{ i.link | safe }}</a>{% endif %}{% if i.button %}<button
+         {% if modifications.button or i.modBtn %}class="{{ modifications.button }} {{ i.modBtn }}"{% endif %}
+         {% for attr, attrValue in i.buttonAttributes %} {{ attr }}="{{ attrValue }}" {% endfor %}
+       >{{ i.button | safe }}</button>{% endif %}{% if i.item %}{{ i.item | safe }}{% endif %}</li
+      >
       {% endfor %}
     </ul>
   {% if hasWrap and name === 'nav' %}
