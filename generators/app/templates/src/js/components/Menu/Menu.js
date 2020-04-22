@@ -5,7 +5,8 @@ import classes from '../../classNames'
 const classNames = classes.menu
 
 export default class Menu {
-  constructor(options = {}) {
+  constructor(app, options = {}) {
+    this.app = app
     this.options = options
     this.classes = {}
     this.names = []
@@ -116,5 +117,18 @@ export default class Menu {
     })
 
     if (this.onClose) this.onClose()
+  }
+
+  onToggle() {
+    let { hasMenuOpen } = { ...this.app.state }
+    hasMenuOpen = !hasMenuOpen
+    this.app.updateState({ hasMenuOpen })
+
+    this.app.toggleScroll(this.app.state.hasMenuOpen)
+  }
+
+  onClose() {
+    this.app.updateState({ hasMenuOpen: false })
+    this.app.toggleScroll(false)
   }
 }

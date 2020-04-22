@@ -4,11 +4,11 @@ import loadPolyfills from './polyfills/loadPolyfills'
 import classNames from './classNames'
 import setHTMLClassNames from './methods/setHTMLClassNames'
 import setLazy from './methods/setLazy'
+
+import Menu from './components/Menu/Menu'
+
+import { NO_SCROLL } from './constants'
 import { isModernBrowser } from './helpers'
-
-// import Menu from './components/Menu/Menu'
-
-// import { NO_SCROLL } from './constants'
 
 class App {
   constructor() {
@@ -17,24 +17,24 @@ class App {
     this.dom = {
       body: document.body,
     }
-    // this.state = {
-    //   hasMenuOpen: false,
-    // }
+    this.state = {
+      hasMenuOpen: false,
+    }
 
-    // this.menu = new Menu({
-    //   classNames: {
-    //     btn: 'burger',
-    //     menu: 'header__nav',
-    //   },
-    // })
+    this.menu = new Menu(this, {
+      classNames: {
+        btn: 'burger',
+        menu: 'header__nav',
+      },
+    })
   }
 
-  // updateState(state) {
-  //   this.state = {
-  //     ...this.state,
-  //     ...state,
-  //   }
-  // }
+  updateState(state) {
+    this.state = {
+      ...this.state,
+      ...state,
+    }
+  }
 
   initMethods() {
     this.methods = {
@@ -48,39 +48,20 @@ class App {
   init() {
     this.initMethods()
 
-    // this.menu.init()
-    // this.menu.onToggle = this.onMenuToggle.bind(this)
-    // this.menu.onClose = this.onMenuClose.bind(this)
+    this.menu.init()
   }
 
-  // onMenuToggle() {
-  //   let { hasMenuOpen } = { ...this.state }
-  //   hasMenuOpen = !hasMenuOpen
-  //   this.updateState({ hasMenuOpen })
+  preventScroll() {
+    this.dom.body.classList.add(NO_SCROLL)
+  }
 
-  //   App.toggleScroll(this, this.state.hasMenuOpen)
-  // }
+  allowScroll() {
+    this.dom.body.classList.remove(NO_SCROLL)
+  }
 
-  // onMenuClose() {
-  //   this.updateState({ hasMenuOpen: false })
-  //   App.toggleScroll(this, this.state.hasMenuOpen)
-  // }
-
-  // static preventScroll(app) {
-  //   app.dom.body.classList.add(NO_SCROLL)
-  // }
-
-  // static allowScroll(app) {
-  //   app.dom.body.classList.remove(NO_SCROLL)
-  // }
-
-  // static toggleScroll(app, condition) {
-  //   if (condition) {
-  //     App.preventScroll(app)
-  //   } else {
-  //     App.allowScroll(app)
-  //   }
-  // }
+  toggleScroll(condition) {
+    condition ? this.preventScroll() : this.allowScroll()
+  }
 }
 
 const init = () => {
