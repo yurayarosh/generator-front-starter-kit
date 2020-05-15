@@ -28,16 +28,22 @@
       "plugin:prettier/recommended"
     ],
     "rules": {
+      "no-unused-vars": 1,
+      "class-methods-use-this": 0,
+      "no-underscore-dangle": 0,
+      "no-param-reassign": 0,
       "no-plusplus": [
         "error",
         {
           "allowForLoopAfterthoughts": true
         }
       ],
-      "no-unused-vars": 1,
-      "class-methods-use-this": 0,
-      "no-underscore-dangle": 0,
-      "no-param-reassign": 0
+      "no-unused-expressions": [
+        "error",
+        {
+          "allowTernary": true
+        }
+      ]
     }
   },
   "babel": {
@@ -69,7 +75,6 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "browser-sync": "^2.26.7",
-    "css-mqpacker": "^7.0.0",
     "del": "^5.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",

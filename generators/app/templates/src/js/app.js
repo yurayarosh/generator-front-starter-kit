@@ -60,7 +60,6 @@ class App {
   }
 
   toggleScroll(condition) {
-    // eslint-disable-next-line
     condition ? this.preventScroll() : this.allowScroll()
   }
 }
