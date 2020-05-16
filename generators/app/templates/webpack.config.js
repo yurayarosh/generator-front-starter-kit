@@ -4,17 +4,14 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { src, dest } from './gulp/config'
 
 function createConfig(env) {
-  if (env === undefined) {
-    env = process.env.NODE_ENV
-  }
-
+  if (!env) env = process.env.NODE_ENV
   const isProduction = env === 'production'
 
   const webpackConfig = {
     mode: isProduction ? 'production' : 'development',
     context: path.join(__dirname, src.js),
     entry: {
-      app: ['./app'],
+      app: './app',
       polyfills: './polyfills',
     },
     output: {
@@ -32,27 +29,6 @@ function createConfig(env) {
         openAnalyzer: false,
       }),
     ],
-    resolve: {
-      extensions: ['.js'],
-      alias: {
-        TweenLite: path.resolve('node_modules', 'gsap/src/uncompressed/TweenLite'),
-        TweenMax: path.resolve('node_modules', 'gsap/src/uncompressed/TweenMax'),
-        TimelineLite: path.resolve('node_modules', 'gsap/src/uncompressed/TimelineLite'),
-        TimelineMax: path.resolve('node_modules', 'gsap/src/uncompressed/TimelineMax'),
-        ScrollMagic: path.resolve(
-          'node_modules',
-          'scrollmagic/scrollmagic/uncompressed/ScrollMagic'
-        ),
-        'animation.gsap': path.resolve(
-          'node_modules',
-          'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap'
-        ),
-        'debug.addIndicators': path.resolve(
-          'node_modules',
-          'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators'
-        ),
-      },
-    },
     optimization: {
       minimize: isProduction,
     },

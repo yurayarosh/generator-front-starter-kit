@@ -1,5 +1,5 @@
 // import regeneratorRuntime from 'regenerator-runtime'
-
+import './public-path'
 import loadPolyfills from './polyfills/loadPolyfills'
 import classNames from './classNames'
 import setHTMLClassNames from './methods/setHTMLClassNames'
