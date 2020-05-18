@@ -61,6 +61,8 @@ export const BEMblock = (node, block) => {
   }
 }
 
+export const appScript = document.getElementById('app-script')
+
 // export function setVhProperty() {
 //   function setProperty() {
 //     const vh = window.innerHeight * 0.01
