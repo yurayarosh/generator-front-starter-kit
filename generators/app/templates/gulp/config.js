@@ -6,6 +6,7 @@ import { existsSync, readdirSync } from 'fs'<% } %>
 const production =
 argv.production || argv.prod || argv._.indexOf('build') !== -1 || false
 const destPath = 'build'
+const srcPath = 'src'
 <% if (multilanguage) { %>
 const languageDirectories =
   existsSync('src/languages') && readdirSync('src/languages').length > 0
@@ -18,22 +19,22 @@ const config = {
   languageDirectories,<% } %>
 
   src: {
-    root: 'src',
-    templates: 'src/templates',
-    templatesData: 'src/templates/data',
-    pagelist: 'src/index.yaml',
-    styles: 'src/styles',
+    root: srcPath,
+    templates: `${srcPath}/templates`,
+    templatesData: `${srcPath}/templates/data`,
+    pagelist: `${srcPath}/index.yaml`,
+    styles: `${srcPath}/styles`,
     // path for sass files that will be generated automatically via some of tasks
-    stylesGen: 'src/styles/generated',
-    js: 'src/js',
-    img: 'src/img',
-    video: 'src/video',
-    svg: 'src/img/svg',
-    icons: 'src/icons',
-    iconsHTML: 'src/templates/icons',
-    fonts: 'src/fonts',
-    data: 'src/data',
-    languages: 'src/languages',
+    stylesGen: 'srcPath/styles/generated',
+    js: `${srcPath}/js`,
+    img: `${srcPath}img`,
+    video: `${srcPath}/video`,
+    svg: `${srcPath}/img/svg`,
+    icons: `${srcPath}/icons`,
+    iconsHTML: `${srcPath}/templates/icons`,
+    fonts: `${srcPath}/fonts`,
+    data: `${srcPath}/data`,
+    languages: `${srcPath}/languages`,
   },
   dest: {
     root: destPath,
