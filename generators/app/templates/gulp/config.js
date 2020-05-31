@@ -25,9 +25,9 @@ const config = {
     pagelist: `${srcPath}/index.yaml`,
     styles: `${srcPath}/styles`,
     // path for sass files that will be generated automatically via some of tasks
-    stylesGen: 'srcPath/styles/generated',
+    stylesGen: `${srcPath}/styles/generated`,
     js: `${srcPath}/js`,
-    img: `${srcPath}img`,
+    img: `${srcPath}/img`,
     video: `${srcPath}/video`,
     svg: `${srcPath}/img/svg`,
     icons: `${srcPath}/icons`,
