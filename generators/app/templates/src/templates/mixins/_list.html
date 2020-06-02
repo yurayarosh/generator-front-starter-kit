@@ -31,7 +31,7 @@
         >{{ i.link | safe }}</a>{% endif %}</dt
       >
       <dd
-        {% if modifications.dd or i.modItemDl %}class="{{ modifications.dd }} {{ i.modItemDl }}"{% endif %}
+        {% if modifications.dd or i.modItemDd %}class="{{ modifications.dd }} {{ i.modItemDd }}"{% endif %}
       >{% if i.dd %}{{ i.dd | safe }}{% endif %}{% if i.link %}<a
         href="{% if i.href %}{{ i.href }}{% else %}#{% endif %}"
         {% if modifications.link or i.modLink %}class="{{ modifications.link }} {{ i.modLink }}"{% endif %}
