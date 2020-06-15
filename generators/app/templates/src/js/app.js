@@ -21,12 +21,7 @@ class App {
       hasMenuOpen: false,
     }
 
-    this.menu = new Menu(this, {
-      classNames: {
-        btn: 'burger',
-        menu: 'header__nav',
-      },
-    })
+    this.menu = new Menu(this)
   }
 
   updateState(state) {

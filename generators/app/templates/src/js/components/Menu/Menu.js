@@ -1,11 +1,11 @@
 import { IS_ACTIVE, IS_OPEN } from '../../constants'
-import { BEMblock } from '../../helpers'
+import BEMblock from '../../lib/BEMBlock'
 import classes from '../../classNames'
 
 const classNames = classes.menu
 
 export default class Menu {
-  constructor(app, options = {}) {
+  constructor(app, options = { classNames: {} }) {
     this.app = app
     this.options = options
     this.classes = {}
@@ -72,8 +72,8 @@ export default class Menu {
 
     this.btns.forEach((btn, i) => {
       const name = btn.getAttribute('data-menu-target') || 'default'
-      const btnClass = btn.getAttribute('data-block') || this.options.classNames.btn
-      const menuClass = this.menus[i].getAttribute('data-block') || this.options.classNames.menu
+      const btnClass = btn.getAttribute('data-block') || this.options.classNames.btn || ''
+      const menuClass = this.menus[i].getAttribute('data-block') || this.options.classNames.menu || ''
       this.classes = {
         ...this.classes,
         [name]: {

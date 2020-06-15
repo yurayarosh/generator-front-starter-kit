@@ -37,30 +37,6 @@ export const isModernBrowser =
   'values' in Object &&
   'from' in Array
 
-export const BEMblock = (node, block) => {
-  const getClassName = mod => `${block}--${mod}`
-
-  const addMod = mod => {
-    node.classList.add(getClassName(mod))
-  }
-  const removeMod = mod => {
-    node.classList.remove(getClassName(mod))
-  }
-  const toggleMod = mod => {
-    node.classList.toggle(getClassName(mod))
-  }
-  const containsMod = mod => node.classList.contains(getClassName(mod))
-
-  return {
-    block,
-    node,
-    addMod,
-    toggleMod,
-    removeMod,
-    containsMod,
-  }
-}
-
 export const appScript = document.getElementById('app-script')
 
 // export function setVhProperty() {
