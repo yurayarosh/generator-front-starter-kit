@@ -7,7 +7,6 @@ import setLazy from './methods/setLazy'
 
 import Menu from './components/Menu/Menu'
 
-import { NO_SCROLL } from './constants'
 import { isModernBrowser } from './helpers'
 
 class App {
@@ -44,18 +43,6 @@ class App {
     this.initMethods()
 
     this.menu.init()
-  }
-
-  preventScroll() {
-    this.dom.body.classList.add(NO_SCROLL)
-  }
-
-  allowScroll() {
-    this.dom.body.classList.remove(NO_SCROLL)
-  }
-
-  toggleScroll(condition) {
-    condition ? this.preventScroll() : this.allowScroll()
   }
 }
 

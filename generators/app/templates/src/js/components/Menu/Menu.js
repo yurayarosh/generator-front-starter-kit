@@ -1,6 +1,7 @@
 import { IS_ACTIVE, IS_OPEN } from '../../constants'
 import BEMblock from '../../lib/BEMBlock'
 import classes from '../../classNames'
+import { toggleScroll, allowScroll } from '../../helpers'
 
 const classNames = classes.menu
 
@@ -47,8 +48,8 @@ export default class Menu {
     this.toggle(e)
   }
 
-  handleKeyDown(e) {
-    if (e && e.code === 'Escape') this.close()
+  handleKeyDown({ code }) {
+    if (code === 'Escape') this.close()
   }
 
   toggle(e) {
@@ -73,7 +74,8 @@ export default class Menu {
     this.btns.forEach((btn, i) => {
       const name = btn.getAttribute('data-menu-target') || 'default'
       const btnClass = btn.getAttribute('data-block') || this.options.classNames.btn || ''
-      const menuClass = this.menus[i].getAttribute('data-block') || this.options.classNames.menu || ''
+      const menuClass =
+        this.menus[i].getAttribute('data-block') || this.options.classNames.menu || ''
       this.classes = {
         ...this.classes,
         [name]: {
@@ -120,15 +122,14 @@ export default class Menu {
   }
 
   onToggle() {
-    let { hasMenuOpen } = { ...this.app.state }
-    hasMenuOpen = !hasMenuOpen
-    this.app.updateState({ hasMenuOpen })
+    const { hasMenuOpen } = { ...this.app.state }
+    this.app.updateState({ hasMenuOpen: !hasMenuOpen })
 
-    this.app.toggleScroll(this.app.state.hasMenuOpen)
+    toggleScroll(this.app.state.hasMenuOpen)
   }
 
   onClose() {
     this.app.updateState({ hasMenuOpen: false })
-    this.app.toggleScroll(false)
+    allowScroll()
   }
 }

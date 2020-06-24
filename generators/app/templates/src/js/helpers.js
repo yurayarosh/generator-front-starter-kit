@@ -39,6 +39,21 @@ export const isModernBrowser =
 
 export const appScript = document.getElementById('app-script')
 
+export function preventScroll() {
+  const getScrollbarWidth = (() => window.innerWidth - document.documentElement.clientWidth)()
+  document.body.style.overflow = 'hidden'
+  if (getScrollbarWidth > 0) document.body.style.marginRight = `${getScrollbarWidth}px`
+}
+
+export function allowScroll() {
+  document.body.style.overflow = ''
+  document.body.style.marginRight = ''
+}
+
+export function toggleScroll(condition) {
+  condition ? preventScroll() : allowScroll()
+}
+
 // export function setVhProperty() {
 //   function setProperty() {
 //     const vh = window.innerHeight * 0.01
