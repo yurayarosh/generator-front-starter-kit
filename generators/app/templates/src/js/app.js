@@ -1,13 +1,13 @@
 // import regeneratorRuntime from 'regenerator-runtime'
 import './public-path'
-import loadPolyfills from './polyfills/loadPolyfills'
 import classNames from './classNames'
-import setHTMLClassNames from './methods/setHTMLClassNames'
-import setLazy from './methods/setLazy'
-
-import Menu from './components/Menu/Menu'
-
 import { isModernBrowser } from './helpers'
+
+import loadPolyfills from './polyfills/loadPolyfills'
+import setHTMLClassNames from './methods/setHTMLClassNames'
+
+import setLazy from './components/LazyLoader/setLazy'
+import Menu from './components/Menu/Menu'
 
 class App {
   constructor() {
