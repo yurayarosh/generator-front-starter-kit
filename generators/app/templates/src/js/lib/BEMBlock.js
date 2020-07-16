@@ -1,4 +1,4 @@
-const BEMblock = (node, block = '') => {
+const BEMBlock = (node, block = '') => {
   if (!block) {
     let classes = node.className.split(' ')
 
@@ -16,9 +16,10 @@ const BEMblock = (node, block = '') => {
   }
 
   const showError = () => {
-    console.warn(node)
     console.warn(
-      'Could not identify block name of element. You should provide it as argument in `BEMBlock()` method.'
+      'Could not identify block name of element.\n',
+      node,
+      '\nYou should provide it as argument in `BEMBlock()` method.'
     )
   }
 
@@ -54,4 +55,4 @@ const BEMblock = (node, block = '') => {
   }
 }
 
-export default BEMblock
+export default BEMBlock
