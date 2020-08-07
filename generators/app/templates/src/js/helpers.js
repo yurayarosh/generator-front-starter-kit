@@ -1,4 +1,5 @@
 // import { debounce } from 'throttle-debounce'
+import { DELAYS } from './constants'
 
 export const {
   isAndroid,
@@ -52,6 +53,22 @@ export function allowScroll() {
 
 export function toggleScroll(condition) {
   condition ? preventScroll() : allowScroll()
+}
+
+export const initAppComponent = ({ app, component, method }) => {
+  let iterations = 0
+  const interval = setInterval(() => {
+    iterations += 1
+    if (app[component] && app[component][method]) {
+      app[component][method].call(app[component])
+      clearInterval(interval)
+    } else if (iterations > 10) {
+      clearInterval(interval)
+      console.warn(
+        `Method app.${component}.${method} was not called in 'initAppComponent()' function.`
+      )
+    }
+  }, DELAYS.min)
 }
 
 // export function setVhProperty() {

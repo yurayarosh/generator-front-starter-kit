@@ -16,6 +16,7 @@ export const {
   // HAS_TEXT,
   // IS_VALID,
   // IS_FIXED,
+  DELAYS,
 } = {
   IS_ACTIVE: 'active',
   IS_OPEN: 'open',
@@ -34,4 +35,10 @@ export const {
   // HAS_TEXT: 'has-text',
   // IS_VALID: 'valid',
   // IS_FIXED: 'fixed',
+  DELAYS: {
+    min: 66,
+    short: 100,
+    medium: 200,
+    long: 300,
+  },
 }
