@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100%;
+}  
+
 html {
   font-size: $base-fz + px;
   line-height: 1.4;
@@ -12,8 +17,6 @@ html {
 body {
   background-color: $white;
   min-width: 320px;
-
-  @include no-scroll;
 }
 
 .icon {
@@ -26,6 +29,6 @@ body {
   $this: &;
 
   &--loaded:not(#{$this}--no-fade-in) {
-    animation: fadeIn 1s;
+    animation: fade-in 1s;
   }
 }

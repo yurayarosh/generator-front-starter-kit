@@ -32,6 +32,7 @@ export const isWebkit = isChrome || isChromiumBased || isChromeIOS || isSafari |
 export const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints
 
 export const isModernBrowser =
+  'scrollBehavior' in document.documentElement.style &&
   'Symbol' in window &&
   'Promise' in window &&
   'assign' in Object &&

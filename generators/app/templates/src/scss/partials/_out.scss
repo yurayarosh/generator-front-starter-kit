@@ -1,0 +1,13 @@
+.out {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  &__header {}
+
+  &__main {
+    flex-grow: 1
+  }
+
+  &__footer {}
+}

@@ -1,5 +1,6 @@
 export const {
   IS_ACTIVE,
+  // IS_CURRENT,
   IS_OPEN,
   // IS_VISIBLE,
   IS_READY,
@@ -10,7 +11,7 @@ export const {
   // IS_ANIMATING,
   // IS_ANIMATED,
   // IS_HIDDEN,
-  NO_SCROLL,
+  // NO_SCROLL,
   NO_TOUCH,
   HAS_ERROR,
   // HAS_TEXT,
@@ -19,6 +20,7 @@ export const {
   DELAYS,
 } = {
   IS_ACTIVE: 'active',
+  // IS_CURRENT: 'current',
   IS_OPEN: 'open',
   // IS_VISIBLE: 'visible',
   IS_READY: 'is-ready',
@@ -29,7 +31,7 @@ export const {
   // IS_ANIMATING: 'animating',
   // IS_ANIMATED: 'animated',
   // IS_HIDDEN: 'hidden',
-  NO_SCROLL: 'no-scroll',
+  // NO_SCROLL: 'no-scroll',
   NO_TOUCH: 'no-touch',
   HAS_ERROR: 'error',
   // HAS_TEXT: 'has-text',

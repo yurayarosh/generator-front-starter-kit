@@ -1,14 +1,13 @@
-$base-fz:    16
-$base-fz-sm: 14
+$base-fz:      16
+$base-fz-sm:   14
+$base-desktop: 1920
+$base-mobile:  414
 
 $text-inputs: "[type='color']", "[type='date']", "[type='datetime']", "[type='datetime-local']", "[type='email']", "[type='month']", "[type='number']", "[type='password']", "[type='search']", "[type='tel']", "[type='text']", "[type='time']", "[type='url']", "[type='week']", "input:not([type])", "textarea"
 $check-inputs: "[type='checkbox']", "[type='radio']"
 
 $c-text: #000
 
+  
 $black: #000
 $white: #fff
-
-=windowHeight($offset: 0px)
-  height: calc(100vh - #{$offset})
-  height: calc((var(--vh, 1vh) * 100) - #{$offset})

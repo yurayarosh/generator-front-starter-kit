@@ -33,9 +33,21 @@
   .no-touch &:hover
     @content
 
+=hover-focus
+  .no-touch &:hover,
+  .no-touch &:focus
+    @content
+
 =ready
   .is-ready &
     @content
+
+=overlay
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
 
 =coverdiv
   position: absolute
@@ -169,17 +181,8 @@
 // example
 // +icon-arrow(20, 20, 2, #000, 45)
 
-=no-scroll
-  &.no-scroll
-    overflow: hidden
-  .no-touch &.no-scroll
-    margin-right: 17px
-
-// BG-IMAGE
-@function img-url($image)
-  @return url('../img/#{$image}')
 =image($image)
-  background-image: img-url($image)
+  background-image: url('../img/#{$image}')
 
 =before
   &::before
@@ -198,13 +201,6 @@
 =notfirst
   &:not(:first-child)
     @content
-
-
-@function em($size, $context: $base-fz)
-  @return ($size/$context) * 1em
-
-@function rem($size, $context: $base-fz)
-  @return ($size/$context) * 1rem
 
 =hidden
   visibility: hidden
@@ -225,4 +221,7 @@
     &:before
       content: counter(list + $var) $sep
       counter-increment: list + $var
-      
+
+=windowHeight($offset: 0px)
+  height: calc(100vh - #{$offset})
+  height: calc((var(--vh, 1vh) * 100) - #{$offset})

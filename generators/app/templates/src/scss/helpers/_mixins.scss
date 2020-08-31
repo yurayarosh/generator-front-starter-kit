@@ -49,10 +49,25 @@
   }
 }
 
+@mixin hover-focus {
+  .no-touch &:hover, 
+  .no-touch &:focus {
+    @content;
+  }
+}
+
 @mixin ready {
   .is-ready & {
     @content;
   }
+}
+
+@mixin overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 @mixin coverdiv {
@@ -229,27 +244,11 @@
   border-bottom: ($bd-width + $units) solid $color;
   transform: rotate($angle + deg);
 }
-
 // example
 // +icon-arrow(20, 20, 2, #000, 45)
 
-@mixin no-scroll {
-  &.no-scroll {
-    overflow: hidden;
-  }
-
-  .no-touch &.no-scroll {
-    margin-right: 17px;
-  }
-}
-
-// BG-IMAGE
-@function img-url($image) {
-  @return url("../img/#{$image}");
-}
-
 @mixin image($image) {
-  background-image: img-url($image);
+  background-image: url('../img/#{$image}');
 }
 
 @mixin before {
@@ -280,14 +279,6 @@
   }
 }
 
-@function em($size, $context: $base-fz) {
-  @return $size / $context * 1em;
-}
-
-@function rem($size, $context: $base-fz) {
-  @return $size / $context * 1rem;
-}
-
 @mixin hidden {
   visibility: hidden;
   opacity: 0;
@@ -314,4 +305,9 @@
       counter-increment: list + $var;
     }
   }
+}
+
+@mixin windowHeight($offset: 0px) {
+  height: calc(100vh - #{$offset});
+  height: calc((var(--vh, 1vh) * 100) - #{$offset});
 }

@@ -1,0 +1,11 @@
+@function em($size, $context: $base-fz) {
+  @return $size / $context * 1em;
+}
+
+@function rem($size, $context: $base-fz) {
+  @return $size / $context * 1rem;
+}
+
+@function vw($size, $context: $base-desktop) {
+  @return $size / $context * 100vw;
+}

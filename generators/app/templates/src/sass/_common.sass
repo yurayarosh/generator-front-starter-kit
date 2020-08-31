@@ -1,4 +1,8 @@
-html  
+html,
+body
+  height: 100%
+  
+html
   font-size: $base-fz + px
   line-height: 1.4
   color: $c-text
@@ -9,7 +13,6 @@ html
 body
   background-color: $white  
   min-width: 320px
-  +no-scroll
 
 .icon
   display: inline-block
@@ -19,5 +22,5 @@ body
 .lazy
   $this: &
   &--loaded:not(#{$this}--no-fade-in)
-    animation: fadeIn 1s
+    animation: fade-in 1s
     
