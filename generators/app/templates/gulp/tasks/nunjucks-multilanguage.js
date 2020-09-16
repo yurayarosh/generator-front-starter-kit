@@ -6,10 +6,16 @@ import changed from 'gulp-changed'
 import prettify from 'gulp-prettify'
 import frontMatter from 'gulp-front-matter'
 import data from 'gulp-data'
-import rename from 'gulp-rename'
 import { basename, extname } from 'path'
 import { readFileSync, existsSync } from 'fs'
-import { src, dest, production, errorHandler, languageDirectories } from '../config'
+import {
+  src,
+  dest,
+  production,
+  errorHandler,
+  languageDirectories,
+  defaultLanguage,
+} from '../config'
 
 const renderHtml = onlyChanged => {
   nunjucksRender.nunjucks.configure({
@@ -19,6 +25,12 @@ const renderHtml = onlyChanged => {
   })
 
   languageDirectories.forEach(dir => {
+    const subfolder = dir === 'uk' ? 'ua' : dir
+    const destPath = dir === defaultLanguage ? dest.html : `${dest.html}/${subfolder}`
+
+    const EXTENSION = 'json'
+    const GLOBAL_DATA_FILE_NAME = 'global'
+
     return gulp
       .src([`${src.templates}/**/[^_]*.html`])
       .pipe(
@@ -34,21 +46,29 @@ const renderHtml = onlyChanged => {
 
           const { relative } = file
 
-          const globalDataBuffer = existsSync(`${src.languages}/${dir}/global.json`)
-            ? readFileSync(`${src.languages}/${dir}/global.json`)
-            : null
-          const globalData =
-            globalDataBuffer && globalDataBuffer.length > 0 ? JSON.parse(globalDataBuffer) : {}
+          const globalData = (() => {
+            const pathToDataFile = `${src.languages}/${dir}/${GLOBAL_DATA_FILE_NAME}.${EXTENSION}`
+            const buffer = existsSync(pathToDataFile) ? readFileSync(pathToDataFile) : null
+            const data = buffer && buffer.length > 0 ? JSON.parse(buffer) : {}
+            return data
+          })()
 
-          const jsonName = basename(relative, extname(relative))
+          const currentPageData = (() => {
+            const relativeToArray = relative.split('/')
+            const subfolderPath = relativeToArray.slice(0, relativeToArray.length - 1).join('/')
+            const dataFileName = basename(relative, extname(relative))
 
-          const currentDataBuffer = existsSync(`${src.languages}/${dir}/${jsonName}.json`)
-            ? readFileSync(`${src.languages}/${dir}/${jsonName}.json`)
-            : null
-          const currentData =
-            currentDataBuffer && currentDataBuffer.length > 0 ? JSON.parse(currentDataBuffer) : {}
+            const pathToDataFile = subfolderPath
+              ? `${src.languages}/${dir}/${subfolderPath}/${dataFileName}.${EXTENSION}`
+              : `${src.languages}/${dir}/${dataFileName}.${EXTENSION}`
 
-          return { ...globalData, ...currentData }
+            const buffer = existsSync(pathToDataFile) ? readFileSync(pathToDataFile) : null
+            const data = buffer && buffer.length > 0 ? JSON.parse(buffer) : {}
+            
+            return data
+          })()
+
+          return { ...globalData, ...currentPageData }
         })
       )
       .pipe(
@@ -62,16 +82,10 @@ const renderHtml = onlyChanged => {
           indent_size: 2,
           wrap_attributes: 'auto', // 'force'
           preserve_newlines: false,
-          // unformatted: [],
           end_with_newline: true,
         })
       )
-      .pipe(
-        rename({
-          suffix: !!dir ? `-${dir}` : '',
-        })
-      )
-      .pipe(gulp.dest(dest.html))
+      .pipe(gulp.dest(destPath))
   })
 }
 

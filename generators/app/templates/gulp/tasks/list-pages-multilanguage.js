@@ -1,7 +1,7 @@
 import gulp from 'gulp'
 import consolidate from 'gulp-consolidate'
 import 'require-yaml'
-import { src, dest, languageDirectories } from '../config'
+import { src, dest, languageDirectories, defaultLanguage } from '../config'
 
 const renderPages = () => {
   delete require.cache[require.resolve(`../../${src.pagelist}`)]
@@ -16,6 +16,7 @@ const renderPages = () => {
     .src(`${__dirname}/index/index.html`)
     .pipe(
       consolidate('lodash', {
+        DEFAULT_LANGUAGE: defaultLanguage,
         pageBlocks: allPages,
       })
     )

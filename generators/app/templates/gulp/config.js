@@ -4,37 +4,39 @@ const argv = require('minimist')(process.argv.slice(2))<% if (multilanguage) { %
 import { existsSync, readdirSync } from 'fs'<% } %>
 
 const production =
-argv.production || argv.prod || argv._.indexOf('build') !== -1 || false
+  argv.production || argv.prod || argv._.indexOf('build') !== -1 || false
 const destPath = 'build'
-const srcPath = 'src'
-<% if (multilanguage) { %>
+const srcPath = 'src'<% if (multilanguage) { %>
+const languagesDataPath = `${srcPath}/languages`
+
 const languageDirectories =
-  existsSync('src/languages') && readdirSync('src/languages').length > 0
-  ? readdirSync('src/languages')
+  existsSync(languagesDataPath) && readdirSync(languagesDataPath).length > 0
+  ? readdirSync(languagesDataPath).filter(dir => dir.indexOf('.') !== 0)
   : ['']<% } %>
 
 const config = {
   env: 'development',
   production,<% if (multilanguage) { %>
-  languageDirectories,<% } %>
+  languageDirectories,
+  defaultLanguage: 'ru',<% } %>
 
   src: {
     root: srcPath,
     templates: `${srcPath}/templates`,
     templatesData: `${srcPath}/templates/data`,
     pagelist: `${srcPath}/index.yaml`,
-    styles: `${srcPath}/styles`,
+    styles: `${srcPath}/styles`,<% if (sprites.indexOf('sprite-svg') !== -1 || sprites.indexOf('png') !== -1) { %>
     // path for sass files that will be generated automatically via some of tasks
-    stylesGen: `${srcPath}/styles/generated`,
+    stylesGen: `${srcPath}/styles/generated`,<% } %>
     js: `${srcPath}/js`,
     img: `${srcPath}/img`,
     video: `${srcPath}/video`,
-    svg: `${srcPath}/img/svg`,
-    icons: `${srcPath}/icons`,
-    iconsHTML: `${srcPath}/templates/icons`,
+    svg: `${srcPath}/img/svg`,<% if (sprites.indexOf('sprite-svg') !== -1 || sprites.indexOf('png') !== -1 || sprites.indexOf('inline-svg') !== -1) { %>
+    icons: `${srcPath}/icons`,<% } %><% if (sprites.indexOf('inline-svg') !== -1) { %>
+    iconsHTML: `${srcPath}/templates/icons`,<% } %>
     fonts: `${srcPath}/fonts`,
-    data: `${srcPath}/data`,
-    languages: `${srcPath}/languages`,
+    data: `${srcPath}/data`,<% if (multilanguage) { %>
+    languages: languagesDataPath,<% } %>
   },
   dest: {
     root: destPath,

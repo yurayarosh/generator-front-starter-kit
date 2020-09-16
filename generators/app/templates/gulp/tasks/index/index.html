@@ -148,9 +148,7 @@
         var iframe = link.querySelector('iframe');
         var src = iframe.dataset.src;
         if(!src) return;
-
-
-
+        
         link.addEventListener('mouseenter', function (e) {
          iframe.setAttribute('src', src);
        });

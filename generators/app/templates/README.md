@@ -47,9 +47,10 @@ We have several useful flags.
 ## Multilanguage version
 
 If you need a multilanguage version of project, you can create folder `languages` in `src` directory, then create subdirectories with data files.  
-Each subdirectory requires `global.json` file, with some general data. Optionaly, you can add other `json` files, with data to specific page. The names of the files has to be equivalent to project pages names. 
+In `gulp/config.js` file you should specify default language by changing `defaultLanguage` value.
+Each subdirectory requires `global.json` file, with some general data. Optionaly, you can add other `json` files, with data to specific page. The names of the files has to be equivalent to project pages names. Also, there is support for subfolders - something like `catalog/some-item-page`.
 Data from `json` files can be used in page template as variables.  
-In build folder would be generated files with different language versions. Amount of pages would be equivalent to amount of `languages` folder subdirectories, filenames would have suffix, equivalent to subdirection name.  
+In build folder would be generated files with different language versions. Default language files would be generated in root directory, other - to subfolders.
 
 ### Structure example
 
@@ -74,8 +75,10 @@ In build folder would be generated files with different language versions. Amoun
     .
     ├── ...
     ├── build                    
-    │   ├── page-en.html             
-    │   ├── page-ru.html
+    │   ├── page.html  
+    │   ├── ru             
+    │   │   ├── page.html           
+    │   └── ...
     └── ...
 ### Handling data example
 
