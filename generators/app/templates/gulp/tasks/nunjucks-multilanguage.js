@@ -6,6 +6,8 @@ import changed from 'gulp-changed'
 import prettify from 'gulp-prettify'
 import frontMatter from 'gulp-front-matter'
 import data from 'gulp-data'
+import jsonlint from 'gulp-jsonlint'
+
 import { basename, extname } from 'path'
 import { readFileSync, existsSync } from 'fs'
 import {
@@ -64,7 +66,7 @@ const renderHtml = onlyChanged => {
 
             const buffer = existsSync(pathToDataFile) ? readFileSync(pathToDataFile) : null
             const data = buffer && buffer.length > 0 ? JSON.parse(buffer) : {}
-            
+
             return data
           })()
 
@@ -89,6 +91,13 @@ const renderHtml = onlyChanged => {
   })
 }
 
+gulp.task('jsonlint', () => {
+  return gulp
+    .src(`${src.languages}/**/*.json`)
+    .pipe(jsonlint())
+    .pipe(jsonlint.reporter())
+})
+
 gulp.task('nunjucks', done => {
   renderHtml()
   done()
@@ -98,11 +107,11 @@ gulp.task('nunjucks:changed', done => {
   done()
 })
 
-const build = gulp => gulp.parallel('nunjucks')
+const build = gulp => gulp.parallel('jsonlint', 'nunjucks')
 const watch = gulp => () => {
-  gulp.watch([`${src.templates}/**/[^_]*.html`], gulp.parallel('nunjucks:changed'))
+  gulp.watch([`${src.templates}/**/[^_]*.html`], gulp.parallel('jsonlint', 'nunjucks:changed'))
 
-  gulp.watch([`${src.templates}/**/_*.html`], gulp.parallel('nunjucks'))
+  gulp.watch([`${src.templates}/**/_*.html`], gulp.parallel('jsonlint', 'nunjucks'))
 }
 
 module.exports.build = build

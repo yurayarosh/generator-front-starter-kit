@@ -1,4 +1,6 @@
 ProjectTitle: <%= name %>
 
 PageList:
-- file: page.html
+  - file: page
+    # title: String - add and it will be shown in preview list instead of filename.
+    # noExtension: Boolean - set to true and '.html' extension won't be added to page url.

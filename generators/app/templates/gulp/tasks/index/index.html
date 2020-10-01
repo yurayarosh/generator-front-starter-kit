@@ -118,10 +118,16 @@
   <section>
     <ol class="pagelist">
       <% _.each(pages.PageList, function(page) {  %>
+        <%
+          extension = page.noExtension ? '' : '.html'
+          fileName = page.file;
+          name = page.title || fileName;
+          url = fileName + extension;
+        %>
           <li>
-            <a class="pagelist__title" target="_blank" href="<%= page.file %>">
-              <em><%= _.split(page.file, '.', 1) %></em>
-              <iframe width="1600" height="1000" data-src="<%= page.file %>"  frameborder="0"></iframe>
+            <a class="pagelist__title" target="_blank" href="<%= url %>">
+              <em>name</em>
+              <iframe width="1600" height="1000" data-src="<%= url %>"  frameborder="0"></iframe>
             </a>            
           </li>
         <% }) %>  

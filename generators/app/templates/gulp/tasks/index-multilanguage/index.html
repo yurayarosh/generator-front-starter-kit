@@ -126,16 +126,17 @@
           <li>
             <strong><%= block.lang %></strong>
             <ol class="pagelist__sublist">
-              <% _.each(block.PageList, function(page) { %>
-              <%
-                name = _.split(page.file, '.', 1);
-                subfolder = block.lang === 'uk' ? 'ua' : block.lang; 
-                url = block.lang === DEFAULT_LANGUAGE ? name : subfolder + '/' + name;
-              %>
+              <% _.each(pages.PageList, function(page) {  %>
+                <%
+                  extension = page.noExtension ? '' : '.html'
+                  fileName = page.file;
+                  name = page.title || fileName;
+                  url = block.lang === DEFAULT_LANGUAGE ? fileName + extension : subfolder + '/' + fileName + extension;
+                %>
                 <li>
-                  <a class="pagelist__title" target="_blank" href="<%= url + '.html' %>">
+                  <a class="pagelist__title" target="_blank" href="<%= url %>">
                     <em><%= name %></em>
-                    <iframe width="1600" height="1000" data-src="<%= url + '.html' %>"  frameborder="0"></iframe>
+                    <iframe width="1600" height="1000" data-src="<%= url %>"  frameborder="0"></iframe>
                   </a>
                 </li>
               <% }) %>
@@ -148,11 +149,16 @@
 
       <ol class="pagelist">
         <% _.each(pageBlocks[0].PageList, function(page) { %>
-        <% name = _.split(page.file, '.', 1) %>
+          <%
+            extension = page.noExtension ? '' : '.html'
+            fileName = page.file;
+            name = page.title || fileName;
+            url = fileName + extension;
+          %>
           <li>
-            <a class="pagelist__title" target="_blank" href="<%= name + '.html' %>">
+            <a class="pagelist__title" target="_blank" href="<%= url %>">
               <em><%= name %></em>
-              <iframe width="1600" height="1000" data-src="<%= name + '.html' %>"  frameborder="0"></iframe>
+              <iframe width="1600" height="1000" data-src="<%= url %>"  frameborder="0"></iframe>
             </a>
           </li>
         <% }) %> 
