@@ -64,7 +64,8 @@
     "printWidth": 100,
     "trailingComma": "es5",
     "semi": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "arrowParens": "avoid"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

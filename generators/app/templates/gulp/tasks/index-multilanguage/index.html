@@ -126,11 +126,12 @@
           <li>
             <strong><%= block.lang %></strong>
             <ol class="pagelist__sublist">
-              <% _.each(pages.PageList, function(page) {  %>
+              <% _.each(block.PageList, function(page) {  %>
                 <%
                   extension = page.noExtension ? '' : '.html'
                   fileName = page.file;
                   name = page.title || fileName;
+                  subfolder = block.lang === 'uk' ? 'ua' : block.lang;
                   url = block.lang === DEFAULT_LANGUAGE ? fileName + extension : subfolder + '/' + fileName + extension;
                 %>
                 <li>
