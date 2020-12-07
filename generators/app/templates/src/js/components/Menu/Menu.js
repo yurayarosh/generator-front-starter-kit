@@ -1,54 +1,48 @@
-import { IS_ACTIVE, IS_OPEN } from '../../constants'
-import BEMblock from '../../lib/BEMBlock'
+import { IS_ACTIVE, IS_OPEN, STATE } from '../../constants'
 import classes from '../../classNames'
-import { toggleScroll, allowScroll } from '../../helpers'
+import { toggleScroll, allowScroll, isTouch } from '../../helpers'
+import preventTouchScroll from '../../lib/preventTouchScroll'
 
 const classNames = classes.menu
 
 export default class Menu {
-  constructor(app, options = { classNames: {} }) {
+  constructor(app, options = {}) {
     this.app = app
     this.options = options
-    this.classes = {}
     this.names = []
     this.menus = []
     this.btns = []
   }
 
   init() {
-    this._addListeners()
+    this.btns = [...document.querySelectorAll(`.${classNames.burger}`)]
+    this.menus = [...document.querySelectorAll(`.${classNames.menu}`)]
+
+    this.setTouchScrollPreventing('init')
   }
 
   destroy() {
-    this._removeListeners()
+    this.onClick = null
+    this.onKeyUp = null
+
+    this.setTouchScrollPreventing('destroy')
   }
 
-  get BEMbtn() {
-    return BEMblock(this.btn, this.classes[this.name].btn)
+  setTouchScrollPreventing(state) {
+    if (isTouch && this.menus.length > 0) {
+      this.menus.forEach(menu => {
+        const pts = preventTouchScroll(menu)
+        if (state === 'init') pts.init()
+        if (state === 'destroy') pts.destroy()
+      })
+    }
   }
 
-  get BEMtarget() {
-    return BEMblock(this.menu, this.classes[this.name].menu)
-  }
-
-  _addListeners() {
-    this.onClick = this.handleClick.bind(this)
-    this.onKeyDown = this.handleKeyDown.bind(this)
-
-    document.addEventListener('click', this.onClick)
-    document.addEventListener('keydown', this.onKeyDown)
-  }
-
-  _removeListeners() {
-    document.removeEventListener('click', this.onClick)
-    document.removeEventListener('keydown', this.onKeyDown)
-  }
-
-  handleClick(e) {
+  onClick = e => {
     this.toggle(e)
   }
 
-  handleKeyDown({ code }) {
+  onKeyUp = ({ code }) => {
     if (code === 'Escape') this.close()
   }
 
@@ -59,9 +53,6 @@ export default class Menu {
     e.preventDefault()
     e.stopPropagation()
 
-    this.btns = [...document.querySelectorAll(`.${classNames.burger}`)]
-    this.menus = [...document.querySelectorAll(`.${classNames.menu}`)]
-
     this.name = this.btn.getAttribute('data-menu-target') || 'default'
     this.menu =
       this.name && this.name !== 'default'
@@ -71,51 +62,30 @@ export default class Menu {
 
     if (!this.menus.length || !this.btns.length || this.btns.length !== this.menus.length) return
 
-    this.btns.forEach((btn, i) => {
-      const name = btn.getAttribute('data-menu-target') || 'default'
-      const btnClass = btn.getAttribute('data-block') || this.options.classNames.btn || ''
-      const menuClass =
-        this.menus[i].getAttribute('data-block') || this.options.classNames.menu || ''
-      this.classes = {
-        ...this.classes,
-        [name]: {
-          btn: btnClass,
-          menu: menuClass,
-        },
-      }
-    })
-
-    if (!this.classes) return
-
-    this.BEMbtn.toggleMod(IS_ACTIVE)
-    this.BEMtarget.toggleMod(IS_OPEN)
+    if (this.btn.getAttribute(STATE) === IS_ACTIVE) {
+      this.btn.removeAttribute(STATE)
+      this.menu.removeAttribute(STATE)
+    } else {
+      this.btn.setAttribute(STATE, IS_ACTIVE)
+      this.menu.setAttribute(STATE, IS_OPEN)
+    }
 
     if (this.onToggle) this.onToggle()
 
-    if (!this.BEMtarget.containsMod(IS_OPEN) && this.onClose) {
+    if (this.menu.getAttribute(STATE) !== IS_OPEN && this.onClose) {
       this.onClose()
     }
   }
 
   close() {
-    if (!this.btns.length || !this.menus.length || !this.classes) return
-
-    this.names = Object.keys(this.classes)
+    if (!this.btns.length || !this.menus.length) return
 
     this.btns.forEach(btn => {
-      this.names.forEach(name => {
-        if (btn.getAttribute('data-menu-target') === name || name === 'default') {
-          BEMblock(btn, this.classes[name].btn).removeMod(IS_ACTIVE)
-        }
-      })
+      btn.removeAttribute(STATE)
     })
 
     this.menus.forEach(menu => {
-      this.names.forEach(name => {
-        if (menu.getAttribute('data-menu') === name || name === 'default') {
-          BEMblock(menu, this.classes[name].menu).removeMod(IS_OPEN)
-        }
-      })
+      menu.removeAttribute(STATE)
     })
 
     if (this.onClose) this.onClose()
@@ -126,10 +96,14 @@ export default class Menu {
     this.app.updateState({ hasMenuOpen: !hasMenuOpen })
 
     toggleScroll(this.app.state.hasMenuOpen)
+
+    if (!hasMenuOpen) this.app.dom.root.classList.add('has-menu-open')
+    else this.app.dom.root.classList.remove('has-menu-open')
   }
 
   onClose() {
     this.app.updateState({ hasMenuOpen: false })
     allowScroll()
+    this.app.dom.root.classList.remove('has-menu-open')
   }
 }

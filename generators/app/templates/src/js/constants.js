@@ -1,4 +1,5 @@
 export const {
+  STATE,
   IS_ACTIVE,
   // IS_CURRENT,
   IS_OPEN,
@@ -19,6 +20,7 @@ export const {
   // IS_FIXED,
   DELAYS,
 } = {
+  STATE: 'data-state',
   IS_ACTIVE: 'active',
   // IS_CURRENT: 'current',
   IS_OPEN: 'open',

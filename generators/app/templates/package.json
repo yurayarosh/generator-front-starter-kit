@@ -47,6 +47,15 @@
     }
   },
   "babel": {
+    "plugins": [
+      "@babel/plugin-transform-runtime",
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ],
     "presets": [
       [
         "@babel/preset-env",
@@ -69,6 +78,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.7.7",
     "@babel/register": "^7.7.7",
     "ansi-colors": "^4.1.1",
@@ -120,7 +131,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.2",
-    "intersection-observer": "^0.7.0",
-    "regenerator-runtime": "^0.13.3"
+    "intersection-observer": "^0.7.0"
   }
 }

@@ -1,17 +1,11 @@
 import { isTouch } from '../helpers'
 import { NO_TOUCH, IS_READY } from '../constants'
 
-function setTouch() {
+const setHTMLClassNames = ({ dom: { root: DOC } }) => {
   if (!isTouch) {
-    document.documentElement.classList.add(NO_TOUCH)
+    DOC.classList.add(NO_TOUCH)
   }
+  DOC.classList.add(IS_READY)
 }
 
-function setReady() {
-  document.documentElement.classList.add(IS_READY)
-}
-
-export default function setHTMLClassNames() {
-  setTouch()
-  setReady()
-}
+export default setHTMLClassNames

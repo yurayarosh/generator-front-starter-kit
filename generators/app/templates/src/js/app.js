@@ -1,6 +1,4 @@
-// import regeneratorRuntime from 'regenerator-runtime'
 import './public-path'
-import classNames from './classNames'
 import { isModernBrowser } from './helpers'
 
 import loadPolyfills from './polyfills/loadPolyfills'
@@ -11,9 +9,8 @@ import Menu from './components/Menu/Menu'
 
 class App {
   constructor() {
-    this.methods = {}
-    this.classNames = classNames
     this.dom = {
+      root: document.documentElement,
       body: document.body,
     }
     this.state = {
@@ -31,16 +28,28 @@ class App {
   }
 
   initMethods() {
-    this.methods = {
-      setHTMLClassNames,
-      setLazy,
-    }
-
-    Object.values(this.methods).forEach(fn => fn(this))
+    setHTMLClassNames(this)
+    setLazy(this)
   }
 
-  init() {
+  onClickHandler = e => {
+    // eslint-disable-next-line
+    this.menu.onClick?.(e)
+  }
+
+  onKeyupHandler = e => {
+    // eslint-disable-next-line
+    this.menu.onKeyUp?.(e)
+  }
+
+  addListeners() {
+    document.addEventListener('click', this.onClickHandler)
+    document.addEventListener('keyup', this.onKeyupHandler)
+  }
+
+  async init() {
     this.initMethods()
+    this.addListeners()
 
     this.menu.init()
   }
@@ -49,7 +58,6 @@ class App {
 const init = () => {
   const app = new App()
   app.init()
-  window.app = app
 }
 
 if (isModernBrowser) {
