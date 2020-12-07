@@ -8,6 +8,11 @@
     "build": "gulp build --production",
     "start": "gulp"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "build/**/*.html": [
       "htmlhint --config .htmlhintrc"
