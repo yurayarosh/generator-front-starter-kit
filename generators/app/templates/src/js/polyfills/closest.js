@@ -1,4 +1,5 @@
 if (!Element.prototype.closest) {
+  // eslint-disable-next-line
   Element.prototype.closest = function(selector) {
     let elem = this
 

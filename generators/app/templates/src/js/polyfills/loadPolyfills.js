@@ -10,10 +10,12 @@ export default function loadPolyfills(callback) {
       callback()
     }
     js.onerror = () => {
+      // eslint-disable-next-line
       console.error(`Failed to load script ${src}`)
     }
     document.head.appendChild(js)
   } else {
+    // eslint-disable-next-line
     console.error('No script element with id `app-script`')
   }
 }

@@ -32,7 +32,7 @@ const markImages = (selector, className) => {
   if (elements.length > 0) elements.forEach(img => img.classList.add(className))
 }
 
-export default function(options) {
+export default options => {
   const {
     observer: { root, rootMargin, threshold },
     className,

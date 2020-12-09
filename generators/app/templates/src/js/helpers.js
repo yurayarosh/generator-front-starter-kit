@@ -65,6 +65,7 @@ export const initAppComponent = ({ app, component, method }) => {
       clearInterval(interval)
     } else if (iterations > 10) {
       clearInterval(interval)
+      // eslint-disable-next-line
       console.warn(
         `Method app.${component}.${method} was not called in 'initAppComponent()' function.`
       )

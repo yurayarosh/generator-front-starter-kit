@@ -33,12 +33,10 @@ class App {
   }
 
   onClickHandler = e => {
-    // eslint-disable-next-line
     this.menu.onClick?.(e)
   }
 
   onKeyupHandler = e => {
-    // eslint-disable-next-line
     this.menu.onKeyUp?.(e)
   }
 
