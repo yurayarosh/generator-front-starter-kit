@@ -1,11 +1,10 @@
 import gulp from 'gulp'
 import consolidate from 'gulp-consolidate'
-import 'require-yaml'
+import req from 'require-yml'
 import { src, dest, languageDirectories, defaultLanguage } from '../config'
 
 const renderPages = () => {
-  delete require.cache[require.resolve(`../../${src.pagelist}`)]
-  const pageBlocks = require(`../../${src.pagelist}`)
+  const pageBlocks = req(src.pagelist)
 
   const allPages = languageDirectories.map(dir => ({
     ...pageBlocks,

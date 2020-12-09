@@ -14,6 +14,13 @@ const renderHtml = onlyChanged => {
     lstripBlocks: false,
   })
 
+  const manageEnv = env => {
+    env.addFilter('setAttribute', (object, key, value) => ({ ...object, [key]: value }))
+    env.addFilter('customSlice', (essence, start, end) => essence.slice(start, end))
+    env.addFilter('split', (string, separator) => string.split(separator))
+    env.addFilter('push', (array, el) => [...array, el])
+  }
+
   return gulp
     .src([`${src.templates}/**/[^_]*.html`])
     .pipe(plumber({
@@ -22,6 +29,7 @@ const renderHtml = onlyChanged => {
     .pipe(gulpif(onlyChanged, changed(dest.html)))
     .pipe(frontMatter({ property: 'data' }))
     .pipe(nunjucksRender({
+      manageEnv,
       PRODUCTION: production,
       path: [src.templates],
     }))
@@ -32,8 +40,7 @@ const renderHtml = onlyChanged => {
       // unformatted: [],
       end_with_newline: true,
     }))
-    .pipe(gulp.dest(dest.html))
-  
+    .pipe(gulp.dest(dest.html))  
 }
 
 gulp.task('nunjucks', () => renderHtml())

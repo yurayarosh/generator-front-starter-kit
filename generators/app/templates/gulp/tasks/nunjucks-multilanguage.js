@@ -33,6 +33,13 @@ const renderHtml = onlyChanged => {
     const EXTENSION = 'json'
     const GLOBAL_DATA_FILE_NAME = 'global'
 
+    const manageEnv = env => {
+      env.addFilter('setAttribute', (object, key, value) => ({ ...object, [key]: value }))
+      env.addFilter('customSlice', (essence, start, end) => essence.slice(start, end))
+      env.addFilter('split', (string, separator) => string.split(separator))
+      env.addFilter('push', (array, el) => [...array, el])
+    }
+
     return gulp
       .src([`${src.templates}/**/[^_]*.html`])
       .pipe(
@@ -75,6 +82,7 @@ const renderHtml = onlyChanged => {
       )
       .pipe(
         nunjucksRender({
+          manageEnv,
           PRODUCTION: production,
           path: [src.templates],
         })

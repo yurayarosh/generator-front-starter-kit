@@ -102,8 +102,8 @@
     "fancy-log": "^1.3.3",
     "gulp-changed": "^4.0.2",
     "gulp": "^4.0.2",<% if (sprites.indexOf('sprite-svg') !== -1 || sprites.indexOf('inline-svg') !== -1) { %>
-    "gulp-cheerio": "^1.0.0",<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>    
-    "gulp-svgstore": "^7.0.1",<% } %><% if (sprites.indexOf('inline-svg') !== -1) { %>    
+    "gulp-cheerio": "^1.0.0",<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
+    "gulp-svgstore": "^7.0.1",<% } %><% if (sprites.indexOf('inline-svg') !== -1) { %>
     "gulp-cheerio-clean-svg": "github:Hiswe/gulp-cheerio-clean-svg",<% } %>
     "gulp-consolidate": "^0.2.0",<% if (multilanguage) { %>
     "gulp-data": "^1.3.1",
@@ -129,7 +129,7 @@
     "plugin-error": "^1.0.1",
     "postcss-csso": "^4.0.0",
     "prettier": "1.19.1",
-    "require-yaml": "0.0.1",    
+    "require-yml": "^2.0.0",
     "webpack": "^4.41.5",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-glsl-loader": "^1.0.1"

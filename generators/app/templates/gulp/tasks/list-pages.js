@@ -1,11 +1,11 @@
 import gulp from 'gulp'
 import consolidate from 'gulp-consolidate'
-import 'require-yaml'
+import req from 'require-yml'
 import { src, dest } from '../config'
 
 gulp.task('list-pages', () => {
-  delete require.cache[require.resolve(`../../${src.pagelist}`)]
-  const pages = require(`../../${src.pagelist}`)
+  const pages = req(src.pagelist)
+
   return gulp
     .src(`${__dirname}/index/index.html`)
     .pipe(consolidate('lodash', {
