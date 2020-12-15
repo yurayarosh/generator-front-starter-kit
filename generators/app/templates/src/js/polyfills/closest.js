@@ -1,11 +1,11 @@
 if (!Element.prototype.closest) {
   // eslint-disable-next-line
   Element.prototype.closest = function(selector) {
-    let elem = this
+    var elem = this
 
     if (!selector || typeof selector !== 'string') return null
 
-    const firstChar = selector.charAt(0)
+    var firstChar = selector.charAt(0)
 
     // Get closest match
     for (; elem && elem !== document; elem = elem.parentNode) {
