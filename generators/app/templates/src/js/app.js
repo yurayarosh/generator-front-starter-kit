@@ -45,7 +45,7 @@ class App {
     document.addEventListener('keyup', this.onKeyupHandler)
   }
 
-  async init() {
+  init() {
     this.initMethods()
     this.addListeners()
 
