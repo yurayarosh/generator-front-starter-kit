@@ -1,11 +1,12 @@
+import { loadCSS } from 'fg-loadcss'
 import lazyLoad from './lazyLoad'
-import { IS_LOADED, HAS_ERROR } from '../../constants'
 import classNames from '../../classNames'
+import { IS_LOADED, HAS_ERROR } from '../../constants'
+import { supportsWoff2 } from '../../helpers'
 
 const defaultConfig = {
   className: 'lazy',
 }
-
 export default class LazyLoader {
   constructor(selector = `.${classNames.lazy}`, options = {}) {
     this.options = {
@@ -97,11 +98,26 @@ export default class LazyLoader {
     this.loader.observe()
   }
 
+  loadFonts() {
+    const PATH_TO_FONTS_CSS = '/css'
+
+    if (supportsWoff2) {
+      loadCSS(`${PATH_TO_FONTS_CSS}/data-woff2.css`)
+    } else {
+      loadCSS(`${PATH_TO_FONTS_CSS}/data-woff.css`)
+    }
+  }
+
   update() {
     this.loader.update()
   }
 
   observe() {
     this.setObserving()
+  }
+
+  init() {
+    this.loadFonts()
+    this.observe()
   }
 }

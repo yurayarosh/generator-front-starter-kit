@@ -22,7 +22,7 @@ Task name          | Description
 ### Other tasks
 Task name          | Description                                                      
 :------------------|:----------------------------------
-`sass` 	           | compile .sass/.scss to .css. We also use [postcss](https://github.com/postcss/postcss), so feel free to include other awesome postcss [plugins](https://github.com/postcss/postcss#plugins) when needed
+`sass` 	           | compile .sass/.scss to .css
 `webpack`          | compile .js sources into bundle file
 `copy`             | copy common files from `./src` path to `./build` path
 `nunjucks`         | compile Mozilla's awesome [nunjucks](https://mozilla.github.io/nunjucks/) templates

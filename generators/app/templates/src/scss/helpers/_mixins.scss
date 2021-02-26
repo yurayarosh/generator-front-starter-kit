@@ -102,7 +102,24 @@
     font-display: swap;
   }
 }
-
+@mixin font-woff($alias, $name, $font-weight: 400, $font-style: normal) {
+  @font-face {
+    font-family: $alias;
+    src: url("../fonts/" + $name + ".woff") format("woff");
+    font-weight: $font-weight;
+    font-style: $font-style;
+    font-display: swap;
+  }
+}
+@mixin font-woff2($alias, $name, $font-weight: 400, $font-style: normal) {
+  @font-face {
+    font-family: $alias;
+    src: url("../fonts/" + $name + ".woff2") format("woff2");
+    font-weight: $font-weight;
+    font-style: $font-style;
+    font-display: swap;
+  }
+}
 // to use:
 //+font(black, cytiapro-black-webfont)
 

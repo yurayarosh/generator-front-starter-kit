@@ -1,0 +1,4 @@
+@import 'helpers/mixins';
+
+@include font-woff('proximanova', 'proximanova-regular-webfont');
+@include font-woff('proximanova', 'proximanova-bold-webfont', 700);

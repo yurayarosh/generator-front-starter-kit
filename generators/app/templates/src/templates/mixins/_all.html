@@ -6,8 +6,7 @@
 <% if (sprites.indexOf('inline-svg') !== -1) { %>
 {% from 'mixins/_icon.html' import icon %}
 {% set icon = icon %}
-<% } %>
-<% if (sprites.indexOf('sprite-svg') !== -1) { %>
+<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
 {% from 'mixins/_icon.html' import iconSvg %}
 {% set iconSvg = iconSvg %}
 <% } %>

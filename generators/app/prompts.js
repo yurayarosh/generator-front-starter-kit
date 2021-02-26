@@ -22,11 +22,11 @@ module.exports = [
     message: 'Choose CSS engine',
     choices: [
       {
-        name: 'Sass + PostCSS',
+        name: 'Sass',
         value: 'sass',
       },
       {
-        name: 'Scss + PostCSS',
+        name: 'Scss',
         value: 'scss',
       },
     ],

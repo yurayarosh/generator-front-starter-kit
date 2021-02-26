@@ -9,7 +9,6 @@ module.exports = function() {
   const HAS_PNG = props.sprites.indexOf('png') !== -1
   const HAS_SVG = props.sprites.indexOf('sprite-svg') !== -1
   const HAS_SVG_INLINE = props.sprites.indexOf('inline-svg') !== -1  
-  // const HAS_SASS = true // maybe later I 'll add scss generation
   const HAS_SASS = props.css === 'sass'
   const HAS_SCSS = props.css === 'scss'
   const HAS_CSS_GRID = props.cssGrid
@@ -44,6 +43,7 @@ module.exports = function() {
   // common files and directories
   fs.copy(this.templatePath('webpack.config.js'), 'webpack.config.js')
   fs.copy(this.templatePath('src/img/svgo/facebook.svg'), 'src/img/svgo/facebook.svg')
+  fs.copy(this.templatePath('src/fonts'), 'src/fonts')
   fs.copy(this.templatePath('src/js'), 'src/js')
   fs.copyTpl(this.templatePath('src/js/app.js'), 'src/js/app.js', props)
   fs.copy(this.templatePath('src/templates'), 'src/templates')
@@ -137,4 +137,5 @@ module.exports = function() {
     fs.delete('src/templates/page.html')
     fs.copy(this.templatePath('src/templates/page.html'), 'src/templates/index.html')
   }
+  if (!HAS_SVG_INLINE && !HAS_PNG) fs.delete('src/templates/mixins/_icon.html')
 }
