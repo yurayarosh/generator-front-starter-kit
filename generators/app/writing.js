@@ -1,14 +1,14 @@
 const { join } = require('path')
 const mkdirp = require('mkdirp')
 
-module.exports = function() {
+module.exports = function () {
   const { props, fs } = this
   const destPath = this.destinationPath()
 
   const HAS_PREVIEW = props.preview
   const HAS_PNG = props.sprites.indexOf('png') !== -1
   const HAS_SVG = props.sprites.indexOf('sprite-svg') !== -1
-  const HAS_SVG_INLINE = props.sprites.indexOf('inline-svg') !== -1  
+  const HAS_SVG_INLINE = props.sprites.indexOf('inline-svg') !== -1
   const HAS_SASS = props.css === 'sass'
   const HAS_SCSS = props.css === 'scss'
   const HAS_CSS_GRID = props.cssGrid

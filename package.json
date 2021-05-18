@@ -20,6 +20,13 @@
   "bugs": {
     "url": "https://github.com/yurayarosh/generator-front-starter-kit/issues"
   },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "es5",
+    "printWidth": 100,
+    "arrowParens": "avoid"
+  },
   "dependencies": {
     "chalk": "^3.0.0",
     "mkdirp": "^1.0.3",

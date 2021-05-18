@@ -8,7 +8,7 @@ module.exports = [
   {
     type: 'input',
     name: 'author',
-    message: 'Input project author'
+    message: 'Input project author',
   },
   {
     type: 'input',

@@ -27,21 +27,24 @@ module.exports = class extends Generator {
         yarn: true,
       })
     } else {
-      this.log(`Run ${chalk.blue('npm install')} or ${chalk.blue('yarn')} to install dependencies later.`)
+      this.log(
+        `Run ${chalk.blue('npm install')} or ${chalk.blue('yarn')} to install dependencies later.`
+      )
     }
   }
 
   end() {
     if (this.props.sprites.indexOf('sprite-svg') > -1) {
       this.log(
-        '\n'
-        + chalk.red('DON\'T FORGET')
-        + ' to install '
-        + chalk.blue('svg4everybody')
-        + ' or ' + chalk.blue('svg-use-it')
-        + ' otherwise IE will not show you svg sprite ¯\\_(ツ)_/¯'
-        + '\n'
-      );
+        '\n' +
+          chalk.red("DON'T FORGET") +
+          ' to install ' +
+          chalk.blue('svg4everybody') +
+          ' or ' +
+          chalk.blue('svg-use-it') +
+          ' otherwise IE will not show you svg sprite ¯\\_(ツ)_/¯' +
+          '\n'
+      )
     }
     this.log(chalk.green('Done!'))
   }

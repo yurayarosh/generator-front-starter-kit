@@ -101,11 +101,7 @@ export default class LazyLoader {
   loadFonts() {
     const PATH_TO_FONTS_CSS = '/css'
 
-    if (supportsWoff2) {
-      loadCSS(`${PATH_TO_FONTS_CSS}/data-woff2.css`)
-    } else {
-      loadCSS(`${PATH_TO_FONTS_CSS}/data-woff.css`)
-    }
+    if (!supportsWoff2) loadCSS(`${PATH_TO_FONTS_CSS}/data-woff.css`)
   }
 
   update() {
