@@ -1,6 +1,6 @@
 import webpack from 'webpack'
 import ESLintPlugin from 'eslint-webpack-plugin'
-import path from 'path'
+import { resolve, join } from 'path'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { src, dest } from './gulp/config'
 
@@ -9,14 +9,14 @@ function createConfig(env) {
   const isProduction = env === 'production'
 
   const webpackConfig = {
-    mode: isProduction ? 'production' : 'development',
-    context: path.join(__dirname, src.js),
+    mode: env,
+    context: join(__dirname, src.js),
     entry: {
       app: './app',
       polyfills: './polyfills',
     },
     output: {
-      path: path.join(__dirname, dest.js),
+      path: join(__dirname, dest.js),
       filename: '[name].js',
       publicPath: 'js/',
     },
@@ -30,7 +30,7 @@ function createConfig(env) {
       }),
       new ESLintPlugin({
         fix: true,
-      })
+      }),
     ],
     optimization: {
       minimize: isProduction,
@@ -40,7 +40,7 @@ function createConfig(env) {
         {
           test: /\.js$/,
           loader: 'babel-loader',
-          exclude: [path.resolve(__dirname, 'node_modules')],
+          exclude: [resolve(__dirname, 'node_modules')],
         },
         {
           test: /\.glsl$/,

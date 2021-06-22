@@ -1,13 +1,13 @@
 import notify from 'gulp-notify'
 
-module.exports = function () {
-  const args = Array.prototype.slice.call(arguments)
+module.exports = function (args) {
   notify
     .onError({
       title: 'Compile Error',
       message: '<%= error.message %>',
       sound: 'Submarine',
     })
-    .apply(this, args)
+    .apply(this, [args])
+    
   this.emit('end')
 }

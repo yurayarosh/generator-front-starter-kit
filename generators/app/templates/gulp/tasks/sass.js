@@ -1,9 +1,19 @@
 import gulp from 'gulp'
 import sass from 'gulp-sass'
 import sourcemaps from 'gulp-sourcemaps'
-import autoprefixer from 'gulp-autoprefixer'
-import csso from 'gulp-csso'
+import autoprefixer from 'autoprefixer'
+import postcss from 'gulp-postcss'
+import csso from 'postcss-csso'
+import postcssCustomProperties from 'postcss-custom-properties'
 import { src, dest, production, errorHandler } from '../config'
+
+const processors = [
+  autoprefixer({
+    cascade: false,
+  }),
+  csso,
+  postcssCustomProperties(),
+]
 
 gulp.task('sass', () =>
   gulp
@@ -16,12 +26,7 @@ gulp.task('sass', () =>
       })
     )
     .on('error', errorHandler)
-    .pipe(
-      autoprefixer({
-        cascade: false,
-      })
-    )
-    .pipe(csso())
+    .pipe(postcss(processors))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(dest.css))
 )

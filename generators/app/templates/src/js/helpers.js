@@ -89,6 +89,18 @@ export const supportsWoff2 = (() => {
   return f.status === 'loading' || f.status === 'loaded'
 })()
 
+export const breakpoints = {
+  xxxl: window.matchMedia('(min-width: 1921px)'),
+  xxl: window.matchMedia('(min-width: 1500px)'),
+  xl: window.matchMedia('(min-width: 1400px)'),
+  lg: window.matchMedia('(min-width: 1200px)'),
+  md: window.matchMedia('(min-width: 992px)'),
+  sm: window.matchMedia('(min-width: 768px)'),
+  xs: window.matchMedia('(min-width: 576px)'),
+  xxs: window.matchMedia('(min-width: 480px)'),
+  xxxs: window.matchMedia('(min-width: 375px)'),
+}
+
 // export function setVhProperty() {
 //   function setProperty() {
 //     const vh = window.innerHeight * 0.01
@@ -98,5 +110,6 @@ export const supportsWoff2 = (() => {
 //   const setPropertyDebounced = debounce(66, setProperty)
 
 //   setProperty()
-//   window.addEventListener('resize', setPropertyDebounced)
+//   const event = isTouch ? 'orientationchange' : 'resize'
+//   window.addEventListener(event, setPropertyDebounced)
 // }

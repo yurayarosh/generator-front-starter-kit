@@ -11,8 +11,8 @@ module.exports = function () {
   const HAS_SVG_INLINE = props.sprites.indexOf('inline-svg') !== -1
   const HAS_SASS = props.css === 'sass'
   const HAS_SCSS = props.css === 'scss'
-  const HAS_CSS_GRID = props.cssGrid
   const HAS_MULTILANGUAGE = props.multilanguage
+  const IS_PWA = props.pwa
   // const HAS_SAY_HELLO = props.sayHello // maybe later i' ll add sayHello() generating
 
   // create directories
@@ -43,10 +43,22 @@ module.exports = function () {
   // common files and directories
   fs.copy(this.templatePath('webpack.config.js'), 'webpack.config.js')
   fs.copy(this.templatePath('src/img/svgo/facebook.svg'), 'src/img/svgo/facebook.svg')
+  fs.copy(this.templatePath('static/favicon.ico'), 'static/favicon.ico')
+  fs.copy(this.templatePath('static/favicon-16x16.png'), 'static/favicon-16x16.png')
+  fs.copy(this.templatePath('static/favicon-32x32.png'), 'static/favicon-32x32.png')
+  fs.copy(this.templatePath('static/mstile-150x150.png'), 'static/mstile-150x150.png')
+  fs.copy(this.templatePath('static/browserconfig.xml'), 'static/browserconfig.xml.png')
+  fs.copy(this.templatePath('static/apple-touch-icon.png'), 'static/apple-touch-icon.png')
+  fs.copy(this.templatePath('static/safari-pinned-tab.svg'), 'static/safari-pinned-tab.svg')
   fs.copy(this.templatePath('src/fonts'), 'src/fonts')
   fs.copy(this.templatePath('src/js'), 'src/js')
   fs.copyTpl(this.templatePath('src/js/app.js'), 'src/js/app.js', props)
   fs.copy(this.templatePath('src/templates'), 'src/templates')
+  fs.copyTpl(
+    this.templatePath('src/templates/layouts/_default.html'),
+    'src/templates/layouts/_default.html',
+    props
+  )
   fs.copyTpl(
     this.templatePath('src/templates/mixins/_icon.html'),
     'src/templates/mixins/_icon.html',
@@ -122,12 +134,23 @@ module.exports = function () {
     fs.copyTpl(this.templatePath('src/scss/app.scss'), 'src/styles/app.scss', props)
   }
 
+  if (IS_PWA) {
+    fs.copy(
+      this.templatePath('static/android-chrome-192x192.png'),
+      'static/android-chrome-192x192.png'
+    )
+    fs.copy(
+      this.templatePath('static/android-chrome-512x512.png'),
+      'static/android-chrome-512x512.png'
+    )
+    fs.copyTpl(this.templatePath('static/site.webmanifest'), 'static/site.webmanifest', props)
+    fs.copy(this.templatePath('gulp/tasks/sw.js'), 'gulp/tasks/sw.js')
+  }
+
   // delete files and directories
   // css
-  if (!HAS_CSS_GRID && HAS_SASS) fs.delete('src/styles/lib/grid')
   if (!HAS_PNG && HAS_SASS) fs.delete('src/styles/_icons-png.sass')
   if (!HAS_PNG && HAS_SCSS) fs.delete('src/styles/_icons-png.scss')
-  if (!HAS_CSS_GRID && HAS_SCSS) fs.delete('src/styles/lib/grid')
 
   // js
   // if (!HAS_SAY_HELLO) fs.delete('src/js/lib/sayHello.js')

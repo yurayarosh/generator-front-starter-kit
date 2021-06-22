@@ -1,5 +1,5 @@
 import gulp from 'gulp'
-import { src, dest } from '../config'
+import { src, dest, staticPath } from '../config'
 
 gulp.task('copy:img', () =>
   gulp
@@ -11,25 +11,15 @@ gulp.task('copy:fonts', () =>
   gulp.src(`${src.fonts}/*.{woff,woff2}`).pipe(gulp.dest(dest.fonts))
 )
 
-gulp.task('copy:video', () =>
-  gulp.src(`${src.video}/**/*.*`).pipe(gulp.dest(dest.video))
-)
-
-gulp.task('copy:data', () =>
-  gulp.src(`${src.data}/**/*.*`).pipe(gulp.dest(dest.data))
-)
-
-gulp.task('copy:rootfiles', () =>
-  gulp.src(`${src.root}/*.*`).pipe(gulp.dest(dest.root))
+gulp.task('copy:static', () =>
+  gulp.src(`${staticPath}/**/*.*`).pipe(gulp.dest(dest.root))
 )
 
 const build = gulp =>
   gulp.series(
-    'copy:img',
-    // 'copy:rootfiles',
-    // 'copy:data',
-    // 'copy:video',
+    'copy:img',    
     'copy:fonts',
+    'copy:static',
   )
 const watch = gulp => () => gulp.watch(`${src.img}/*`, gulp.parallel('copy:img'))
 

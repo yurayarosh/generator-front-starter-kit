@@ -14,7 +14,8 @@ gulp.task('nunjucks', () => getTaskBuild('nunjucks'))
 gulp.task('sass', () => getTaskBuild('sass'))
 gulp.task('svgo', () => getTaskBuild('svgo'))<% if (preview) { %>
 gulp.task('list-pages', getTaskBuild('list-pages'))<% } %>
-gulp.task('webpack', getTaskBuild('webpack'))
+gulp.task('webpack', getTaskBuild('webpack'))<% if (pwa) { %>
+gulp.task('sw', getTaskBuild('sw'))<% } %>
 
 gulp.task('copy:watch', getTaskWatch('copy'))<% if (sprites.indexOf('inline-svg') !== -1) { %>
 gulp.task('svgicons:watch', getTaskWatch('svgicons'))<% } %><% if (sprites.indexOf('png') !== -1) { %>
@@ -51,7 +52,8 @@ gulp.task(
     'nunjucks',
     'webpack',<% if (preview) { %>
     'list-pages',<% } %>
-    'copy'
+    'copy'<% if (pwa) { %>,
+    'sw'<% } %>
   )
 )
 
@@ -78,8 +80,7 @@ gulp.task(
     'copy:watch',<% if (sprites.indexOf('inline-svg') !== -1) { %>
     'svgicons:watch',<% } %><% if (sprites.indexOf('png') !== -1) { %>
     'sprite-png:watch',<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
-    'sprite:svg:watch',
-    <% } %>
+    'sprite:svg:watch',<% } %>
     'nunjucks:watch',
     'svgo:watch',<% if (preview) { %>
     'list-pages:watch',<% } %>

@@ -2,41 +2,51 @@ module.exports = [
   {
     type: 'input',
     name: 'name',
-    message: 'Input project name',
+    message: 'Input project name.',
     default: 'app',
   },
   {
     type: 'input',
     name: 'author',
-    message: 'Input project author',
+    message: 'Input project author.',
   },
   {
     type: 'input',
     name: 'license',
-    message: 'Input project license',
+    message: 'Input project license.',
     default: 'MIT',
   },
   {
     type: 'list',
-    name: 'css',
-    message: 'Choose CSS engine',
+    name: 'package-manager',
+    message: 'What package manager would it be?',
     choices: [
       {
-        name: 'Sass',
-        value: 'sass',
+        name: 'Yarn',
+        value: 'yarn',
       },
       {
-        name: 'Scss',
-        value: 'scss',
+        name: 'NPM',
+        value: 'npm',
       },
     ],
     default: 0,
   },
   {
-    type: 'confirm',
-    name: 'cssGrid',
-    message: 'Add css grid to libs?',
-    default: false,
+    type: 'list',
+    name: 'css',
+    message: 'Choose CSS engine.',
+    choices: [
+      {
+        name: 'Scss',
+        value: 'scss',
+      },
+      {
+        name: 'Sass',
+        value: 'sass',
+      },
+    ],
+    default: 0,
   },
   {
     type: 'checkbox',
@@ -62,6 +72,12 @@ module.exports = [
   },
   {
     type: 'confirm',
+    name: 'pwa',
+    message: 'Make pwa version?',
+    default: true,
+  },
+  {
+    type: 'confirm',
     name: 'preview',
     message: 'Make preview page with all htmls?',
     default: true,
@@ -71,11 +87,5 @@ module.exports = [
     name: 'multilanguage',
     message: 'Make multilanguage version?',
     default: false,
-  },
-  {
-    type: 'confirm',
-    name: 'install',
-    message: 'Install dependencies right now?',
-    default: true,
   },
 ]

@@ -3,18 +3,19 @@ import log from 'fancy-log'
 const argv = require('minimist')(process.argv.slice(2))<% if (multilanguage) { %>
 import { existsSync, readdirSync } from 'fs'<% } %>
 
-const production =
-  argv.production || argv.prod || argv._.indexOf('build') !== -1 || false
+const production = argv.production || argv.prod || argv._.indexOf('build') !== -1 || false
 const destPath = 'build'
-const srcPath = 'src'<% if (multilanguage) { %>
+const srcPath = 'src'
+const staticPath = 'static'<% if (multilanguage) { %>
 const languagesDataPath = `${srcPath}/languages`
 
 const languageDirectories =
   existsSync(languagesDataPath) && readdirSync(languagesDataPath).length > 0
-  ? readdirSync(languagesDataPath).filter(dir => dir.indexOf('.') !== 0)
+  ? readdirSync(languagesDataPath).filter(dir => dir.indexOf('.') !== 0) // Exclude system folders starting with.
   : ['']<% } %>
 
 const config = {
+  staticPath,
   env: 'development',
   production,<% if (multilanguage) { %>
   languageDirectories,
@@ -30,12 +31,10 @@ const config = {
     stylesGen: `${srcPath}/styles/generated`,<% } %>
     js: `${srcPath}/js`,
     img: `${srcPath}/img`,
-    video: `${srcPath}/video`,
     svg: `${srcPath}/img/svg`,<% if (sprites.indexOf('sprite-svg') !== -1 || sprites.indexOf('png') !== -1 || sprites.indexOf('inline-svg') !== -1) { %>
     icons: `${srcPath}/icons`,<% } %><% if (sprites.indexOf('inline-svg') !== -1) { %>
     iconsHTML: `${srcPath}/templates/icons`,<% } %>
-    fonts: `${srcPath}/fonts`,
-    data: `${srcPath}/data`,<% if (multilanguage) { %>
+    fonts: `${srcPath}/fonts`,<% if (multilanguage) { %>
     languages: languagesDataPath,<% } %>
   },
   dest: {
@@ -44,9 +43,7 @@ const config = {
     css: `${destPath}/css`,
     js: `${destPath}/js`,
     img: `${destPath}/img`,
-    video: `${destPath}/video`,
     fonts: `${destPath}/fonts`,
-    data: `${destPath}/data`,
   },
 
   setEnv(env) {

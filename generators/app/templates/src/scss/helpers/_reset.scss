@@ -31,7 +31,9 @@ textarea {
 input[type="submit"],
 input[type="reset"],
 button {
-  cursor: pointer;
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 
   &::-moz-focus-inner {
     padding: 0;
@@ -49,8 +51,8 @@ input, button {
   border: 0;
 }
 
-div, input, textarea, select, button,
-h1, h2, h3, h4, h5, h6, a, span, a:focus {
+div, input, textarea, select,
+h1, h2, h3, h4, h5, h6, span {
   outline: none;
 }
 
@@ -87,7 +89,7 @@ a {
   color: inherit;
 }
 
-input, textarea, button {
+input, textarea, button, select {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -95,6 +97,8 @@ input, textarea, button {
   color: inherit;
   line-height: inherit;
   letter-spacing: inherit;
+  text-transform: inherit;
+  text-align: inherit;
 }
 
 input, textarea {
@@ -103,6 +107,10 @@ input, textarea {
     font-size: inherit;
     font-weight: inherit;
     font-style: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    text-align: inherit;
   }
 }
 

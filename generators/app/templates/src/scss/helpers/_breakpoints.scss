@@ -1,3 +1,9 @@
+@mixin xxxl {
+  @include r(1920) {
+    @content;
+  }
+}
+
 @mixin xxl {
   @include r(1499) {
     @content;
@@ -40,6 +46,18 @@
   }
 }
 
+@mixin xxxs {
+  @include r(374) {
+    @content;
+  }
+}
+
+@mixin xxxlmin {
+  @include rmin(1921) {
+    @content;
+  }
+}
+
 @mixin xxlmin {
   @include rmin(1500) {
     @content;
@@ -78,6 +96,12 @@
 
 @mixin xxsmin {
   @include rmin(480) {
+    @content;
+  }
+}
+
+@mixin xxxsmin {
+  @include rmin(375) {
     @content;
   }
 }
