@@ -43,7 +43,8 @@ const config = {
     css: `${destPath}/css`,
     js: `${destPath}/js`,
     img: `${destPath}/img`,
-    fonts: `${destPath}/fonts`,
+    fonts: `${destPath}/fonts`,<% if (pwa) { %>
+    sw: `${destPath}/sw.js`,<% } %>
   },
 
   setEnv(env) {
