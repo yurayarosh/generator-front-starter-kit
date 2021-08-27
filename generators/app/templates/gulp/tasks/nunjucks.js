@@ -5,6 +5,8 @@ import gulpif from 'gulp-if'
 import changed from 'gulp-changed'
 import prettify from 'gulp-prettify'
 import frontMatter from 'gulp-front-matter'
+
+import updateFileStat from '../util/updateFileStat'
 import { src, dest, production, errorHandler } from '../config'
 
 const renderHtml = onlyChanged => {
@@ -28,18 +30,23 @@ const renderHtml = onlyChanged => {
     }))
     .pipe(gulpif(onlyChanged, changed(dest.html)))
     .pipe(frontMatter({ property: 'data' }))
-    .pipe(nunjucksRender({
-      manageEnv,
-      PRODUCTION: production,
-      path: [src.templates],
-    }))
-    .pipe(prettify({
-      indent_size: 2,
-      wrap_attributes: 'auto', // 'force'
-      preserve_newlines: false,
-      // unformatted: [],
-      end_with_newline: true,
-    }))
+    .pipe(
+      nunjucksRender({
+        manageEnv,
+        PRODUCTION: production,
+        path: [src.templates],
+      })
+    )
+    .pipe(
+      prettify({
+        indent_size: 2,
+        wrap_attributes: 'auto', // 'force'
+        preserve_newlines: false,
+        // unformatted: [],
+        end_with_newline: true,
+      })
+    )
+    .pipe(updateFileStat())
     .pipe(gulp.dest(dest.html))  
 }
 

@@ -1,3 +1,6 @@
+import { basename, extname } from 'path'
+import { readFileSync, existsSync } from 'fs'
+
 import gulp from 'gulp'
 import nunjucksRender from 'gulp-nunjucks-render'
 import plumber from 'gulp-plumber'
@@ -8,8 +11,7 @@ import frontMatter from 'gulp-front-matter'
 import data from 'gulp-data'
 import jsonlint from 'gulp-jsonlint'
 
-import { basename, extname } from 'path'
-import { readFileSync, existsSync } from 'fs'
+import updateFileStat from '../util/updateFileStat'
 import {
   src,
   dest,
@@ -95,6 +97,7 @@ const renderHtml = onlyChanged => {
           end_with_newline: true,
         })
       )
+      .pipe(updateFileStat())
       .pipe(gulp.dest(destPath))
   })
 }

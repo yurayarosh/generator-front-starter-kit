@@ -1,9 +1,8 @@
 import gulp from 'gulp'
-import colors from 'ansi-colors'
 import { generateSW } from 'workbox-build'
 import { dest } from '../config'
 
-// Don' t cache scripts and files if has theese words in path.
+// Don' t cache scripts and files if has theese words in path (admin panel, callback services etc.).
 const urlPattern = ({ url }) =>
   ![
     'adminlte',
@@ -21,28 +20,30 @@ const urlPattern = ({ url }) =>
   ].find(excp => url.href.toLowerCase().includes(excp))
 
 gulp.task('sw', () => {
-  if (!process.env.WEBPACK_HASH) {
-    throw new Error(
-      `Environment variable ${colors.green('WEBPACK_HASH')} has to be specified via webpack task.`
-    )
-  }
-
   return generateSW({
     globDirectory: dest.root,
     globPatterns: ['**/*.{json,js,css,woff2,ico,png,jpg,svg,xml}'],
-    globIgnores: ['assets/**', 'img/**', '*.map*', '*manifest', 'sw.js', '.htaccess'],
-    swDest: dest.sw,
-    additionalManifestEntries: [
-      { url: '/', revision: process.env.WEBPACK_HASH }, // Precashe start_url
+    globIgnores: [
+      'assets/**',
+      'img/**',
+      'uploads/**',
+      '*.map*',
+      '*manifest',
+      'sw.js',
+      '.htaccess',
+      'robots.txt',
     ],
-
+    swDest: dest.sw,
+    offlineGoogleAnalytics: true,
+    cleanupOutdatedCaches: true,
+    skipWaiting: true,
     // Define runtime caching rules.
     runtimeCaching: [
       {
         // Match callback function. (https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-routing#%7EmatchCallback)
         urlPattern,
-        // Apply a cache-first strategy.
-        handler: 'CacheFirst',
+        // Apply a network-first strategy.
+        handler: 'NetworkFirst',
         options: {
           // Use a custom cache name.
           cacheName: 'runtime-v1',
