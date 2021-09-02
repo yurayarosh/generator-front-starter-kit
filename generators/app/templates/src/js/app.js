@@ -6,6 +6,7 @@ import setHTMLClassNames from './methods/setHTMLClassNames'
 
 import setLazy from './components/LazyLoader/setLazy'
 import Menu from './components/Menu/Menu'
+import Offline from './components/Offline/Offline'
 
 class App {
   constructor() {
@@ -18,6 +19,7 @@ class App {
     }
 
     this.menu = new Menu(this)
+    this.offline = new Offline(this)
   }
 
   updateState(state) {
@@ -32,6 +34,14 @@ class App {
     setLazy(this)
   }
 
+  onOfflineHandler = () => {
+    this.offline.onOffline()
+  }
+
+  onOnlineHandler = () => {
+    this.offline.onOnline()
+  }
+
   onClickHandler = e => {
     this.menu.onClick?.(e)
   }
@@ -43,6 +53,8 @@ class App {
   addListeners() {
     document.addEventListener('click', this.onClickHandler)
     document.addEventListener('keyup', this.onKeyupHandler)
+    window.addEventListener('offline', this.onOfflineHandler)
+    window.addEventListener('online', this.onOnlineHandler)
   }
 
   init() {
@@ -50,6 +62,7 @@ class App {
     this.addListeners()
 
     this.menu.init()
+    this.offline.init()
   }
 }
 
