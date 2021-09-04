@@ -4,21 +4,17 @@ import { generateSW } from 'workbox-build'
 import _UID from '../util/_UID'
 import { dest } from '../config'
 
-// Don' t cache scripts and files if has theese words in path (admin panel, callback services etc.).
+// Don' t cache scripts and files if has theese words in path (admin panel, calltracking services etc.).
 const urlPattern = ({ url }) =>
   ![
-    'adminlte',
-    'bootstrap',
-    'pjax',
-    'fontawesome',
-    'font-awesome',
-    'glyphicons',
-    'all-skins',
-    'gridview',
-    'backend',
-    'phpmyadmin',
-    'google',
-    'ringostat',
+    // video files
+    '.mp4',
+    '.webm',
+    '.mkv',
+    '.flv',
+    '.avi',
+    '.wmv',
+    '.3gp',
   ].find(excp => url.href.toLowerCase().includes(excp))
 
 gulp.task('sw', () => {
