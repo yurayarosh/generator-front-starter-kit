@@ -21,6 +21,8 @@ const renderHtml = onlyChanged => {
     env.addFilter('customSlice', (essence, start, end) => essence.slice(start, end))
     env.addFilter('split', (string, separator) => string.split(separator))
     env.addFilter('push', (array, el) => [...array, el])
+
+    env.addGlobal('ENVIRONMENT', process.env.NODE_ENV)
   }
 
   return gulp
@@ -42,7 +44,6 @@ const renderHtml = onlyChanged => {
         indent_size: 2,
         wrap_attributes: 'auto', // 'force'
         preserve_newlines: false,
-        // unformatted: [],
         end_with_newline: true,
       })
     )

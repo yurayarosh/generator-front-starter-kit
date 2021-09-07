@@ -28,13 +28,15 @@
     <link rel="stylesheet" media="all" href="/css/data-woff2.css">
     <link rel="stylesheet" media="all" href="/css/app.css">
     <% if (pwa) { %>
+    {% if ENVIRONMENT === 'production' %}
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
         })
       }
-    </script><% } %>
+    </script>
+    {% endif %}<% } %>
   </head>
   <body {% if bodyClass %}class="{{ bodyClass }}"{% endif %}>
     <!-- BEGIN content -->

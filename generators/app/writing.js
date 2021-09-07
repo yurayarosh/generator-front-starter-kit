@@ -29,9 +29,9 @@ module.exports = function () {
   fs.copy(this.templatePath('README.md'), 'README.md')
   fs.copyTpl(this.templatePath('package.json'), 'package.json', props)
 
-  // gulp configs
+  // gulp configs and utils
   fs.copyTpl(this.templatePath('gulp/config.js'), 'gulp/config.js', props)
-  fs.copy(this.templatePath('gulp/util/handle-errors.js'), 'gulp/util/handle-errors.js')
+  fs.copy(this.templatePath('gulp/util'), 'gulp/util')
 
   // common tasks
   fs.copy(this.templatePath('gulp/tasks/copy.js'), 'gulp/tasks/copy.js')
