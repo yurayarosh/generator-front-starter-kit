@@ -31,7 +31,7 @@ const config = {
     stylesGen: `${srcPath}/styles/generated`,<% } %>
     js: `${srcPath}/js`,
     img: `${srcPath}/img`,
-    svg: `${srcPath}/img/svg`,<% if (sprites.indexOf('sprite-svg') !== -1 || sprites.indexOf('png') !== -1 || sprites.indexOf('inline-svg') !== -1) { %>
+    svg: `${srcPath}/img/svg`,<% if (sprites.indexOf('sprite-svg') !== -1 || sprites.indexOf('png') !== -1 || sprites.indexOf('inline-svg') !== -1 || sprites.indexOf('inline-svg-lazy') !== -1) { %>
     icons: `${srcPath}/icons`,<% } %><% if (sprites.indexOf('inline-svg') !== -1) { %>
     iconsHTML: `${srcPath}/templates/icons`,<% } %>
     fonts: `${srcPath}/fonts`,<% if (multilanguage) { %>
@@ -42,7 +42,8 @@ const config = {
     html: destPath,
     css: `${destPath}/css`,
     js: `${destPath}/js`,
-    img: `${destPath}/img`,
+    img: `${destPath}/img`,<% if (sprites.indexOf('inline-svg-lazy') !== -1) { %>
+    icons: `${destPath}/img/icons`,<% } %>
     fonts: `${destPath}/fonts`,<% if (pwa) { %>
     sw: `${destPath}/sw.js`,<% } %>
   },
