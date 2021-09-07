@@ -1,19 +1,22 @@
 import { loadCSS } from 'fg-loadcss'
 import lazyLoad from './lazyLoad'
-import classNames from '../../classNames'
 import { IS_LOADED, HAS_ERROR } from '../../constants'
 import { supportsWoff2 } from '../../helpers'
 
 const defaultConfig = {
   className: 'lazy',
+  onLoad: () => {},
+  onError: () => {},
 }
 export default class LazyLoader {
-  constructor(selector = `.${classNames.lazy}`, options = {}) {
+  constructor(selector = '', options = {}) {
     this.options = {
       ...defaultConfig,
       ...options,
       selector,
-    }
+    }<% if (sprites.indexOf('inline-svg-lazy') !== -1) { %>
+    
+    this.loadedIcons = []<% } %>
   }
 
   isPicture({ parentNode }) {
@@ -26,10 +29,10 @@ export default class LazyLoader {
 
   setAttributes(el) {
     const {
-      dataset: { src, poster, srcset, backgroundImage: bgImage },
+      dataset: { src, poster, srcset, backgroundImage: bgImage, icon },
     } = el
 
-    if (src) el.src = src
+    if (src && !icon) el.src = src
     if (srcset) el.srcset = srcset
     if (poster) el.setAttribute('poster', poster)
     if (bgImage) el.style.backgroundImage = `url('${bgImage}')`
@@ -51,26 +54,67 @@ export default class LazyLoader {
         if (sourceSrcset) source.srcset = sourceSrcset
       })
     }
+  }<% if (sprites.indexOf('inline-svg-lazy') !== -1) { %>
+  
+  async loadIcon(image, resolve) {
+    const { src } = image.dataset
+    const duplicate = this.loadedIcons.find(({ src: s }) => s === src)
+
+    try {
+      const res = duplicate ? null : await fetch(src)
+      const data = duplicate ? duplicate.data : await res.text()
+
+      // If icon was loaded already, or fetch is successful.
+      if (duplicate || res.ok) {
+        const parser = new DOMParser()
+        const svg = parser.parseFromString(data, 'image/svg+xml').querySelector('svg')
+
+        if (image.id) svg.id = image.id
+        if (image.className) svg.classList = image.classList
+        svg.setAttribute('data-processed', true)
+
+        image.parentNode?.replaceChild(svg, image)
+
+        if (!duplicate) {
+          this.loadedIcons.push({
+            src,
+            data,
+          })
+        }
+      }
+    } catch (error) {
+      console.error(`Error loading "${src}" icon.`, error)
+    }
+
+    // Clear from duplications.
+    this.loadedIcons = this.loadedIcons.reduce((arr, item) => {
+      const dupl = arr.find(({ src: s }) => s === item.src)
+      return dupl ? arr : [...arr, item]
+    }, [])
+
+    resolve()
   }
-
+  <% } %>
   handleLoad(el) {
-    const onLoad = ({ currentTarget }) => {
-      currentTarget.classList.add(`${this.options.className}--${IS_LOADED}`)
-    }
+    return new Promise(resolve => {
+      const onLoad = e => {
+        e.currentTarget.classList.add(`${this.options.className}--${IS_LOADED}`)
+        this.options.onLoad?.(e)
+        resolve()
+      }
 
-    const onError = e => {
-      e.currentTarget.classList.add(`${this.options.className}--${HAS_ERROR}`)
-      if (this.options.onError) this.options.onError(e)
-    }
+      const onError = e => {
+        e.currentTarget.classList.add(`${this.options.className}--${HAS_ERROR}`)
+        this.options.onError?.(e)
+        resolve()
+      }
+      <% if (sprites.indexOf('inline-svg-lazy') !== -1) { %>
+      if (el.dataset.icon) this.loadIcon(el, resolve)<% } %>
+      if (el.tagName.toLowerCase() === 'video') el.onloadeddata = onLoad
+      if (el.tagName.toLowerCase() === 'img' && !el.dataset.icon) el.onload = onLoad
 
-    if (el.tagName.toLowerCase() === 'video') {
-      el.onloadeddata = onLoad.bind(this)
-    }
-    if (el.tagName.toLowerCase() === 'img') {
-      el.onload = onLoad.bind(this)
-    }
-
-    el.onerror = onError.bind(this)
+      el.onerror = onError
+    })
   }
 
   removeAttributes(el) {
@@ -84,24 +128,17 @@ export default class LazyLoader {
     }
   }
 
-  processElement(el) {
+  processElement = async el => {
     this.setAttributes(el)
-    this.handleLoad(el)
+    await this.handleLoad(el)
     this.removeAttributes(el)
-  }
-
-  setObserving() {
-    this.loader = lazyLoad({
-      process: this.processElement.bind(this),
-      ...this.options,
-    })
-    this.loader.observe()
   }
 
   loadFonts() {
     const PATH_TO_FONTS_CSS = '/css'
+    const fileName = 'data-woff.css'
 
-    if (!supportsWoff2) loadCSS(`${PATH_TO_FONTS_CSS}/data-woff.css`)
+    if (!supportsWoff2) loadCSS(`${PATH_TO_FONTS_CSS}/${fileName}`)
   }
 
   update() {
@@ -109,7 +146,11 @@ export default class LazyLoader {
   }
 
   observe() {
-    this.setObserving()
+    this.loader = lazyLoad({
+      process: this.processElement,
+      ...this.options,
+    })
+    this.loader.observe()
   }
 
   init() {

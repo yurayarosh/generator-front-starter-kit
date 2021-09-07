@@ -5,6 +5,6 @@ export default async app => {
   if (!element) return
 
   const { default: LazyLoader } = await import(/* webpackChunkName: "LazyLoader" */ './LazyLoader')
-  app.lazyLoader = new LazyLoader()
+  app.lazyLoader = new LazyLoader(`.${classNames.lazy}`)
   app.lazyLoader.init()
 }

@@ -4,7 +4,7 @@ import config from './gulp/config'
 const getTaskBuild = task => require(`./gulp/tasks/${task}`).build(gulp)
 const getTaskWatch = task => require(`./gulp/tasks/${task}`).watch(gulp)
 
-gulp.task('clean', getTaskBuild('clean'))<% if (sprites.indexOf('inline-svg') !== -1) { %>
+gulp.task('clean', getTaskBuild('clean'))<% if (sprites.indexOf('inline-svg') !== -1 || sprites.indexOf('inline-svg-lazy') !== -1) { %>
 gulp.task('svgicons', getTaskBuild('svgicons'))<% } %><% if (sprites.indexOf('png') !== -1) { %>
 gulp.task('sprite-png', getTaskBuild('sprite-png'))<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
 gulp.task('sprite:svg', () => getTaskBuild('sprite-svg'))<% } %>
@@ -17,7 +17,7 @@ gulp.task('list-pages', getTaskBuild('list-pages'))<% } %>
 gulp.task('webpack', getTaskBuild('webpack'))<% if (pwa) { %>
 gulp.task('sw', getTaskBuild('sw'))<% } %>
 
-gulp.task('copy:watch', getTaskWatch('copy'))<% if (sprites.indexOf('inline-svg') !== -1) { %>
+gulp.task('copy:watch', getTaskWatch('copy'))<% if (sprites.indexOf('inline-svg') !== -1 || sprites.indexOf('inline-svg-lazy') !== -1) { %>
 gulp.task('svgicons:watch', getTaskWatch('svgicons'))<% } %><% if (sprites.indexOf('png') !== -1) { %>
 gulp.task('sprite-png:watch', getTaskWatch('sprite-png'))<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
 gulp.task('sprite:svg:watch', getTaskWatch('sprite-svg'))<% } %>
@@ -43,7 +43,7 @@ gulp.task(
   'build',
   gulp.series(
     setmodeProd,
-    'clean',<% if (sprites.indexOf('inline-svg') !== -1) { %>
+    'clean',<% if (sprites.indexOf('inline-svg') !== -1 || sprites.indexOf('inline-svg-lazy') !== -1) { %>
     'svgicons',<% } %><% if (sprites.indexOf('png') !== -1) { %>
     'sprite-png',<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
     'sprite:svg',<% } %>
@@ -61,7 +61,7 @@ gulp.task(
   'build:dev',
   gulp.series(
     setmodeDev,
-    'clean',<% if (sprites.indexOf('inline-svg') !== -1) { %>
+    'clean',<% if (sprites.indexOf('inline-svg') !== -1 || sprites.indexOf('inline-svg-lazy') !== -1) { %>
     'svgicons',<% } %><% if (sprites.indexOf('png') !== -1) { %>
     'sprite-png',<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
     'sprite:svg',<% } %>
@@ -77,7 +77,7 @@ gulp.task(
 gulp.task(
   'watch',
   gulp.parallel(
-    'copy:watch',<% if (sprites.indexOf('inline-svg') !== -1) { %>
+    'copy:watch',<% if (sprites.indexOf('inline-svg') !== -1 || sprites.indexOf('inline-svg-lazy') !== -1) { %>
     'svgicons:watch',<% } %><% if (sprites.indexOf('png') !== -1) { %>
     'sprite-png:watch',<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
     'sprite:svg:watch',<% } %>

@@ -54,9 +54,14 @@ module.exports = [
     message: 'How will we handle icons?',
     choices: [
       {
+        name: 'Lazy loaded inline SVG',
+        value: 'inline-svg-lazy',
+        checked: true,
+      },
+      {
         name: 'Inline SVG',
         value: 'inline-svg',
-        checked: true,
+        checked: false,
       },
       {
         name: 'SVG sprites',

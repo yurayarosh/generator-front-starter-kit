@@ -9,6 +9,7 @@ module.exports = function () {
   const HAS_PNG = props.sprites.indexOf('png') !== -1
   const HAS_SVG = props.sprites.indexOf('sprite-svg') !== -1
   const HAS_SVG_INLINE = props.sprites.indexOf('inline-svg') !== -1
+  const HAS_SVG_INLINE_LAZY = props.sprites.indexOf('inline-svg-lazy') !== -1
   const HAS_SASS = props.css === 'sass'
   const HAS_SCSS = props.css === 'scss'
   const HAS_MULTILANGUAGE = props.multilanguage
@@ -52,7 +53,7 @@ module.exports = function () {
   fs.copy(this.templatePath('static/safari-pinned-tab.svg'), 'static/safari-pinned-tab.svg')
   fs.copy(this.templatePath('src/fonts'), 'src/fonts')
   fs.copy(this.templatePath('src/js'), 'src/js')
-  fs.copyTpl(this.templatePath('src/js/app.js'), 'src/js/app.js', props)
+  fs.copyTpl(this.templatePath('src/js/components/LazyLoader/LazyLoader.js'), 'src/js/components/LazyLoader/LazyLoader.js', props)
   fs.copy(this.templatePath('src/templates'), 'src/templates')
   fs.copyTpl(
     this.templatePath('src/templates/layouts/_default.html'),
@@ -71,7 +72,7 @@ module.exports = function () {
   )
 
   //condition files
-  if (HAS_SVG_INLINE || HAS_SVG) {
+  if (HAS_SVG_INLINE_LAZY || HAS_SVG_INLINE || HAS_SVG) {
     fs.copy(this.templatePath('src/icons/facebook.svg'), 'src/icons/facebook.svg')
   }
   if (HAS_PNG) {
@@ -99,8 +100,8 @@ module.exports = function () {
   }
 
   // svg inline task
-  if (HAS_SVG_INLINE) {
-    fs.copy(this.templatePath('gulp/tasks/svgicons.js'), 'gulp/tasks/svgicons.js')
+  if (HAS_SVG_INLINE_LAZY || HAS_SVG_INLINE) {
+    fs.copyTpl(this.templatePath('gulp/tasks/svgicons.js'), 'gulp/tasks/svgicons.js', props)
   }
 
   // svg sprites task
@@ -160,5 +161,5 @@ module.exports = function () {
     fs.delete('src/templates/page.html')
     fs.copy(this.templatePath('src/templates/page.html'), 'src/templates/index.html')
   }
-  if (!HAS_SVG_INLINE && !HAS_PNG) fs.delete('src/templates/mixins/_icon.html')
+  if (!HAS_SVG_INLINE_LAZY && !HAS_SVG_INLINE && !HAS_PNG) fs.delete('src/templates/mixins/_icon.html')
 }

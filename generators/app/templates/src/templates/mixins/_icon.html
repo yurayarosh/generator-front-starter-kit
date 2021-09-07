@@ -1,6 +1,15 @@
 <% if (sprites.indexOf('inline-svg') !== -1) { %>{% macro icon(name, mod) %}
   {% include 'icons/_'+ name +'.html' %}
-{% endmacro %}<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>
-{% macro iconSvg(name) %}
+{% endmacro %}<% } %><% if (sprites.indexOf('sprite-svg') !== -1) { %>{% macro icon(name) %}
   <svg class="icon-svg icon-svg-{{ name }}"><use xlink:href="img/sprite.svg#icon-svg-{{ name }}"></use></svg>
+{% endmacro %}<% } %><% if (sprites.indexOf('inline-svg-lazy') !== -1) { %>{% macro icon(name, width = '', height = '') %}
+  <img
+    class="js-lazy icon icon--{{ name }}"
+    src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+    alt=""
+    data-src="/img/icons/{{ name }}.svg"
+    data-icon="true"
+    {% if width %}width="{{ width }}"{% endif %}
+    {% if height %}height="{{ height }}"{% endif %}
+  />
 {% endmacro %}<% } %>
