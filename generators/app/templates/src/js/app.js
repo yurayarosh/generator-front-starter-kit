@@ -74,5 +74,5 @@ const init = () => {
 if (isModernBrowser) {
   document.addEventListener('DOMContentLoaded', init)
 } else {
-  document.addEventListener('DOMContentLoaded', loadPolyfills.bind(null, init))
+  document.addEventListener('DOMContentLoaded', loadPolyfills(init))
 }
