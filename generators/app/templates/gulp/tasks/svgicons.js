@@ -12,12 +12,12 @@ import { src, dest } from '../config'<% } %>
 <% if (sprites.indexOf('inline-svg') !== -1) { %>
 gulp.task('svgicons:clean', () =>
   del([`${src.iconsHTML}/*.html`]).then(paths => {
-    log('Deleted:', colors.magenta(paths.join('\n')))
+    log('Deleted:\n', colors.magenta(paths.join('\n')))
   })
 )<% } %><% if (sprites.indexOf('inline-svg-lazy') !== -1) { %>
 gulp.task('svgicons:clean', () =>
   del([`${dest.icons}/*.svg`]).then(paths => {
-    log('Deleted:', colors.magenta(paths.join('\n')))
+    log('Deleted:\n', colors.magenta(paths.join('\n')))
   })
 )<% } %>
 
