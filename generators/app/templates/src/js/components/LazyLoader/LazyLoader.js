@@ -5,8 +5,8 @@ import { supportsWoff2 } from '../../helpers'
 
 const defaultConfig = {
   className: 'lazy',
-  onLoad: () => {},
-  onError: () => {},
+  onLoad() {},
+  onError() {},
 }
 export default class LazyLoader {
   constructor(selector = '', options = {}) {
@@ -69,6 +69,11 @@ export default class LazyLoader {
         const parser = new DOMParser()
         const svg = parser.parseFromString(data, 'image/svg+xml').querySelector('svg')
 
+        svg.onload = e => {
+          svg.classList.add(`${this.options.className}--${IS_LOADED}`)
+          this.options.onLoad?.(e)
+        }
+
         if (image.id) svg.id = image.id
         if (image.className) svg.classList = image.classList
         svg.setAttribute('data-processed', true)
@@ -81,6 +86,10 @@ export default class LazyLoader {
             data,
           })
         }
+      } else if (res && !res.ok) {
+        image.classList.add(`${this.options.className}--${HAS_ERROR}`)
+        image.setAttribute('data-processed', true)
+        this.options.onError?.(image, res)
       }
     } catch (error) {
       console.error(`Error loading "${src}" icon.`, error)
@@ -136,9 +145,9 @@ export default class LazyLoader {
 
   loadFonts() {
     const PATH_TO_FONTS_CSS = '/css'
-    const fileName = 'data-woff.css'
+    const FILE_NAME = 'data-woff.css'
 
-    if (!supportsWoff2) loadCSS(`${PATH_TO_FONTS_CSS}/${fileName}`)
+    if (!supportsWoff2) loadCSS(`${PATH_TO_FONTS_CSS}/${FILE_NAME}`)
   }
 
   update() {
