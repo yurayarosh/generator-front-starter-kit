@@ -27,6 +27,7 @@ gulp.task('sw', () => {
       'uploads/**',
       '*.map*',
       '*manifest',
+      '*sitemap*',
       'sw.js',
       '.htaccess',
       'robots.txt',
