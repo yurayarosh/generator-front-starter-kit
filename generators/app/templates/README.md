@@ -130,3 +130,11 @@ You can also use [npm scripts](https://docs.npmjs.com/misc/scripts):
 * `npm run start` - same as `gulp default`.
 * `npm run build` - same as `gulp build`.
 * `npm run ghpages` to push only `./build` folder to **gh-pages** branch on github (very useful for previews).
+
+## Some built in features
+
+### Js components
+
+* `Menu` - add burger menu toggling behaviour.
+* `LazyLoader` - images lazy loading.
+* `Offline` - add panel whith message when there is no interneta connection.
