@@ -1,10 +1,11 @@
 import { loadCSS } from 'fg-loadcss'
 import lazyLoad from './lazyLoad'
 import { IS_LOADED, HAS_ERROR } from '../../constants'
-import { supportsWoff2 } from '../../helpers'
+import { supportsWebp, supportsWoff2 } from '../../helpers'
 
 const defaultConfig = {
   className: 'lazy',
+  replaceByWebp: false,
   onLoad() {},
   onError() {},
 }
@@ -29,13 +30,25 @@ export default class LazyLoader {
 
   setAttributes(el) {
     const {
-      dataset: { src, poster, srcset, backgroundImage: bgImage, icon },
+      dataset: { src, poster, srcset, backgroundImage: bgImage, icon, replaceByWebp },
     } = el
 
-    if (src && !icon) el.src = src
-    if (srcset) el.srcset = srcset
-    if (poster) el.setAttribute('poster', poster)
-    if (bgImage) el.style.backgroundImage = `url('${bgImage}')`
+    const shouldAddWebp = this.options.replaceByWebp && replaceByWebp !== 'false' && supportsWebp
+
+    const getSourcePath = path => {
+      if (!shouldAddWebp) return path
+
+      const extensions = ['.jpg', '.jpeg', '.png']
+      extensions.forEach(ext => {
+        if (path.toLowerCase().includes(ext)) path = path.replace(ext, '.webp')
+      })
+      return path
+    }
+
+    if (src && !icon) el.src = getSourcePath(src)
+    if (srcset) el.srcset = getSourcePath(srcset)
+    if (poster) el.setAttribute('poster', getSourcePath(poster))
+    if (bgImage) el.style.backgroundImage = `url('${getSourcePath(bgImage)}')`
 
     if (this.isPicture(el)) {
       const picture = el.parentNode
@@ -45,13 +58,13 @@ export default class LazyLoader {
         dataset: { src: imgSrc, srcset: imgSrcset },
       } = img
 
-      if (imgSrc) img.src = imgSrc
-      if (imgSrcset) img.srcset = imgSrcset
+      if (imgSrc) img.src = getSourcePath(imgSrc)
+      if (imgSrcset) img.srcset = getSourcePath(imgSrcset)
       sources.forEach(source => {
         const {
           dataset: { srcset: sourceSrcset },
         } = source
-        if (sourceSrcset) source.srcset = sourceSrcset
+        if (sourceSrcset) source.srcset = getSourcePath(sourceSrcset)
       })
     }
   }<% if (sprites.indexOf('inline-svg-lazy') !== -1) { %>

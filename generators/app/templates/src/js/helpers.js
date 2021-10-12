@@ -119,6 +119,15 @@ export const supportsWoff2 = (() => {
   return f.status === 'loading' || f.status === 'loaded'
 })()
 
+export const supportsWebp = (() => {
+  const elem = document.createElement('canvas')
+
+  if (elem.getContext && elem.getContext('2d')) {
+    return elem.toDataURL('image/webp').indexOf('data:image/webp') === 0
+  }
+  return false
+})()
+
 // export function setVhProperty() {
 //   function setProperty() {
 //     const vh = window.innerHeight * 0.01

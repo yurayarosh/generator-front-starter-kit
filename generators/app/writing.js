@@ -51,7 +51,7 @@ module.exports = function () {
   fs.copy(this.templatePath('static/browserconfig.xml'), 'static/browserconfig.xml.png')
   fs.copy(this.templatePath('static/apple-touch-icon.png'), 'static/apple-touch-icon.png')
   fs.copy(this.templatePath('static/safari-pinned-tab.svg'), 'static/safari-pinned-tab.svg')
-  fs.copy(this.templatePath('src/fonts'), 'src/fonts')
+  fs.copy(this.templatePath('static/fonts'), 'static/fonts')
   fs.copy(this.templatePath('src/js'), 'src/js')
   fs.copyTpl(this.templatePath('src/js/components/LazyLoader/LazyLoader.js'), 'src/js/components/LazyLoader/LazyLoader.js', props)
   fs.copy(this.templatePath('src/templates'), 'src/templates')
