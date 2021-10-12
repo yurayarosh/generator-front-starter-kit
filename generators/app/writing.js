@@ -20,7 +20,7 @@ module.exports = function () {
   mkdirp(join(destPath, 'src/fonts'))
 
   // dotfiles
-  fs.copy(this.templatePath('.gitignore'), '.gitignore')
+  fs.copy(this.templatePath('gitignore'), '.gitignore')
   fs.copy(this.templatePath('.editorconfig'), '.editorconfig')
   fs.copy(this.templatePath('.htmlhintrc'), '.htmlhintrc')
   fs.copy(this.templatePath('.sass-lint.yml'), '.sass-lint.yml')
