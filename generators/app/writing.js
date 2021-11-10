@@ -16,9 +16,6 @@ module.exports = function () {
   const IS_PWA = props.pwa
   // const HAS_SAY_HELLO = props.sayHello // maybe later i' ll add sayHello() generating
 
-  // create directories
-  mkdirp(join(destPath, 'src/fonts'))
-
   // dotfiles
   fs.copy(this.templatePath('gitignore'), '.gitignore')
   fs.copy(this.templatePath('.editorconfig'), '.editorconfig')
