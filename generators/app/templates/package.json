@@ -137,7 +137,7 @@
     "prettier": "2.3.1",
     "require-yml": "^2.0.0",
     "webpack": "^5.39.1",
-    "webpack-bundle-analyzer": "^4.2.0",<% if (pwa) { %>
+    "webpack-bundle-analyzer": "^4.2.0"<% if (pwa) { %>,
     "workbox-build": "^6.1.5"<% } %>
   },
   "dependencies": {
