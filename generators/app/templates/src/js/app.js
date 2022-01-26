@@ -14,6 +14,7 @@ class App {
       root: document.documentElement,
       body: document.body,
     }
+    this.LANGUAGE = this.dom.root.getAttribute('lang')?.split('-')[0].toLowerCase() || 'en'
     this.state = {
       hasMenuOpen: false,
     }

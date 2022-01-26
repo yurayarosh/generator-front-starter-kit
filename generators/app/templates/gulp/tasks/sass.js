@@ -1,11 +1,14 @@
 import gulp from 'gulp'
-import sass from 'gulp-sass'
+import dartSass from 'sass'
+import gulpSass from 'gulp-sass'
 import sourcemaps from 'gulp-sourcemaps'
 import autoprefixer from 'autoprefixer'
 import postcss from 'gulp-postcss'
 import csso from 'postcss-csso'
 import postcssCustomProperties from 'postcss-custom-properties'
 import { src, dest, production, errorHandler } from '../config'
+
+const sass = gulpSass(dartSass)
 
 const processors = [
   autoprefixer({
@@ -21,7 +24,7 @@ gulp.task('sass', () =>
     .pipe(sourcemaps.init())
     .pipe(
       sass({
-        outputStyle: production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
+        outputStyle: production ? 'compressed' : 'expanded',
         precision: 5,
       })
     )
